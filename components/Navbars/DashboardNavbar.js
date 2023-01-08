@@ -30,7 +30,7 @@ const DashboardNavbar = ({ routes }) => {
               <NotificationDropdown />
             </li>
             <li>
-              <UserDropdown />
+              <UserDropdown avatarSeed={Date.now()} />
             </li>
           </ul>
         </div>
