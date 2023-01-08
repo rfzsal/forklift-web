@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+
 const CardHeader = ({ title, actionButton }) => {
   return (
     <div className="rounded-t mb-0 px-4 py-3 border-b">
@@ -29,15 +31,25 @@ const TableHead = () => {
   );
 };
 
-const TableRow = ({ label, total, percentage, barColor }) => {
-  const randomInt = (() => {
-    const min = 0;
-    const max = 27;
+const TableRow = ({ label, total, percentage }) => {
+  const [value, setValue] = useState(0);
 
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  })();
+  const randomPercentage = (value / 27) * 100;
 
-  const randomPercentage = (randomInt / 27) * 100;
+  useEffect(() => {
+    if (!total && !percentage) {
+      const randomInt = (() => {
+        const min = 0;
+        const max = 27;
+
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      })();
+
+      setValue(randomInt);
+    } else {
+      setValue(total);
+    }
+  }, [total, percentage]);
 
   return (
     <tr>
@@ -45,7 +57,7 @@ const TableRow = ({ label, total, percentage, barColor }) => {
         {label}
       </th>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
-        {total || randomInt}
+        {value}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
         <div className="flex items-center">
@@ -70,7 +82,7 @@ const TableRow = ({ label, total, percentage, barColor }) => {
 
 const CardKomponen = () => {
   return (
-    <>
+    <div className="w-full px-4">
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded">
         <CardHeader
           title="Statistik Pengecekan"
@@ -183,7 +195,7 @@ const CardKomponen = () => {
           </table>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

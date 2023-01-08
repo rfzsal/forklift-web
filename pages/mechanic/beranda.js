@@ -6,7 +6,7 @@ const Beranda = () => {
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-full xl:w-8/12 mb-12 xl:mb-0">
+        <div className="w-full xl:w-8/12 mb-4 xl:mb-0">
           <CardRiwayat />
         </div>
         <div className="w-full xl:w-4/12">
