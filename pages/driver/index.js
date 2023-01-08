@@ -1,7 +1,7 @@
 const { useRouter } = require('next/router');
 const { useEffect } = require('react');
 
-const Leader = () => {
+const Driver = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -11,4 +11,4 @@ const Leader = () => {
   return null;
 };
 
-export default Leader;
+export default Driver;
