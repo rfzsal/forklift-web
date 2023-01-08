@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 // components
 
@@ -51,7 +51,7 @@ export default function CardSocialTraffic() {
                     <div className="relative w-full">
                       <div className="overflow-hidden h-2 text-xs flex rounded bg-red-200">
                         <div
-                          style={{ width: "60%" }}
+                          style={{ width: '60%' }}
                           className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-red-500"
                         ></div>
                       </div>
@@ -72,7 +72,7 @@ export default function CardSocialTraffic() {
                     <div className="relative w-full">
                       <div className="overflow-hidden h-2 text-xs flex rounded bg-emerald-200">
                         <div
-                          style={{ width: "70%" }}
+                          style={{ width: '70%' }}
                           className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"
                         ></div>
                       </div>
@@ -93,7 +93,7 @@ export default function CardSocialTraffic() {
                     <div className="relative w-full">
                       <div className="overflow-hidden h-2 text-xs flex rounded bg-purple-200">
                         <div
-                          style={{ width: "80%" }}
+                          style={{ width: '80%' }}
                           className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-purple-500"
                         ></div>
                       </div>
@@ -114,7 +114,7 @@ export default function CardSocialTraffic() {
                     <div className="relative w-full">
                       <div className="overflow-hidden h-2 text-xs flex rounded bg-lightBlue-200">
                         <div
-                          style={{ width: "75%" }}
+                          style={{ width: '75%' }}
                           className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-lightBlue-500"
                         ></div>
                       </div>
@@ -135,7 +135,7 @@ export default function CardSocialTraffic() {
                     <div className="relative w-full">
                       <div className="overflow-hidden h-2 text-xs flex rounded bg-orange-200">
                         <div
-                          style={{ width: "30%" }}
+                          style={{ width: '30%' }}
                           className="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-emerald-500"
                         ></div>
                       </div>

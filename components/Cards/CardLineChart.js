@@ -1,33 +1,33 @@
-import React from "react";
-import Chart from "chart.js";
+import React from 'react';
+import Chart from 'chart.js';
 
 export default function CardLineChart() {
   React.useEffect(() => {
     var config = {
-      type: "line",
+      type: 'line',
       data: {
         labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
         ],
         datasets: [
           {
             label: new Date().getFullYear(),
-            backgroundColor: "#4c51bf",
-            borderColor: "#4c51bf",
+            backgroundColor: '#4c51bf',
+            borderColor: '#4c51bf',
             data: [65, 78, 66, 44, 56, 67, 75],
             fill: false,
           },
           {
             label: new Date().getFullYear() - 1,
             fill: false,
-            backgroundColor: "#fff",
-            borderColor: "#fff",
+            backgroundColor: '#fff',
+            borderColor: '#fff',
             data: [40, 68, 86, 74, 56, 60, 87],
           },
         ],
@@ -37,42 +37,42 @@ export default function CardLineChart() {
         responsive: true,
         title: {
           display: false,
-          text: "Sales Charts",
-          fontColor: "white",
+          text: 'Sales Charts',
+          fontColor: 'white',
         },
         legend: {
           labels: {
-            fontColor: "white",
+            fontColor: 'white',
           },
-          align: "end",
-          position: "bottom",
+          align: 'end',
+          position: 'bottom',
         },
         tooltips: {
-          mode: "index",
+          mode: 'index',
           intersect: false,
         },
         hover: {
-          mode: "nearest",
+          mode: 'nearest',
           intersect: true,
         },
         scales: {
           xAxes: [
             {
               ticks: {
-                fontColor: "rgba(255,255,255,.7)",
+                fontColor: 'rgba(255,255,255,.7)',
               },
               display: true,
               scaleLabel: {
                 display: false,
-                labelString: "Month",
-                fontColor: "white",
+                labelString: 'Month',
+                fontColor: 'white',
               },
               gridLines: {
                 display: false,
                 borderDash: [2],
                 borderDashOffset: [2],
-                color: "rgba(33, 37, 41, 0.3)",
-                zeroLineColor: "rgba(0, 0, 0, 0)",
+                color: 'rgba(33, 37, 41, 0.3)',
+                zeroLineColor: 'rgba(0, 0, 0, 0)',
                 zeroLineBorderDash: [2],
                 zeroLineBorderDashOffset: [2],
               },
@@ -81,20 +81,20 @@ export default function CardLineChart() {
           yAxes: [
             {
               ticks: {
-                fontColor: "rgba(255,255,255,.7)",
+                fontColor: 'rgba(255,255,255,.7)',
               },
               display: true,
               scaleLabel: {
                 display: false,
-                labelString: "Value",
-                fontColor: "white",
+                labelString: 'Value',
+                fontColor: 'white',
               },
               gridLines: {
                 borderDash: [3],
                 borderDashOffset: [3],
                 drawBorder: false,
-                color: "rgba(255, 255, 255, 0.15)",
-                zeroLineColor: "rgba(33, 37, 41, 0)",
+                color: 'rgba(255, 255, 255, 0.15)',
+                zeroLineColor: 'rgba(33, 37, 41, 0)',
                 zeroLineBorderDash: [2],
                 zeroLineBorderDashOffset: [2],
               },
@@ -103,7 +103,7 @@ export default function CardLineChart() {
         },
       },
     };
-    var ctx = document.getElementById("line-chart").getContext("2d");
+    var ctx = document.getElementById('line-chart').getContext('2d');
     window.myLine = new Chart(ctx, config);
   }, []);
   return (

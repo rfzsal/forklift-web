@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
 // layout for page
 
-import Auth from "layouts/Auth.js";
+import Auth from 'layouts/Auth.js';
 
 export default function Register() {
   return (
@@ -90,7 +90,7 @@ export default function Register() {
                         className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
                       />
                       <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                        I agree with the{" "}
+                        I agree with the{' '}
                         <a
                           href="#pablo"
                           className="text-lightBlue-500"

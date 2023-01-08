@@ -1,12 +1,12 @@
-import React from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import React from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 
-import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
-import UserDropdown from "components/Dropdowns/UserDropdown.js";
+import NotificationDropdown from 'components/Dropdowns/NotificationDropdown.js';
+import UserDropdown from 'components/Dropdowns/UserDropdown.js';
 
 export default function Sidebar() {
-  const [collapseShow, setCollapseShow] = React.useState("hidden");
+  const [collapseShow, setCollapseShow] = React.useState('hidden');
   const router = useRouter();
   return (
     <>
@@ -16,7 +16,7 @@ export default function Sidebar() {
           <button
             className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
             type="button"
-            onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}
+            onClick={() => setCollapseShow('bg-white m-2 py-3 px-6')}
           >
             <i className="fas fa-bars"></i>
           </button>
@@ -41,7 +41,7 @@ export default function Sidebar() {
           {/* Collapse */}
           <div
             className={
-              "md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " +
+              'md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded ' +
               collapseShow
             }
           >
@@ -62,7 +62,7 @@ export default function Sidebar() {
                   <button
                     type="button"
                     className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
-                    onClick={() => setCollapseShow("hidden")}
+                    onClick={() => setCollapseShow('hidden')}
                   >
                     <i className="fas fa-times"></i>
                   </button>
@@ -94,20 +94,20 @@ export default function Sidebar() {
                   <a
                     href="#pablo"
                     className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/admin/dashboard") !== -1
-                        ? "text-lightBlue-500 hover:text-lightBlue-600"
-                        : "text-blueGray-700 hover:text-blueGray-500")
+                      'text-xs uppercase py-3 font-bold block ' +
+                      (router.pathname.indexOf('/admin/dashboard') !== -1
+                        ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                        : 'text-blueGray-700 hover:text-blueGray-500')
                     }
                   >
                     <i
                       className={
-                        "fas fa-tv mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/dashboard") !== -1
-                          ? "opacity-75"
-                          : "text-blueGray-300")
+                        'fas fa-tv mr-2 text-sm ' +
+                        (router.pathname.indexOf('/admin/dashboard') !== -1
+                          ? 'opacity-75'
+                          : 'text-blueGray-300')
                       }
-                    ></i>{" "}
+                    ></i>{' '}
                     Dashboard
                   </a>
                 </Link>
@@ -118,20 +118,20 @@ export default function Sidebar() {
                   <a
                     href="#pablo"
                     className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/admin/settings") !== -1
-                        ? "text-lightBlue-500 hover:text-lightBlue-600"
-                        : "text-blueGray-700 hover:text-blueGray-500")
+                      'text-xs uppercase py-3 font-bold block ' +
+                      (router.pathname.indexOf('/admin/settings') !== -1
+                        ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                        : 'text-blueGray-700 hover:text-blueGray-500')
                     }
                   >
                     <i
                       className={
-                        "fas fa-tools mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/settings") !== -1
-                          ? "opacity-75"
-                          : "text-blueGray-300")
+                        'fas fa-tools mr-2 text-sm ' +
+                        (router.pathname.indexOf('/admin/settings') !== -1
+                          ? 'opacity-75'
+                          : 'text-blueGray-300')
                       }
-                    ></i>{" "}
+                    ></i>{' '}
                     Settings
                   </a>
                 </Link>
@@ -142,20 +142,20 @@ export default function Sidebar() {
                   <a
                     href="#pablo"
                     className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/admin/tables") !== -1
-                        ? "text-lightBlue-500 hover:text-lightBlue-600"
-                        : "text-blueGray-700 hover:text-blueGray-500")
+                      'text-xs uppercase py-3 font-bold block ' +
+                      (router.pathname.indexOf('/admin/tables') !== -1
+                        ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                        : 'text-blueGray-700 hover:text-blueGray-500')
                     }
                   >
                     <i
                       className={
-                        "fas fa-table mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/tables") !== -1
-                          ? "opacity-75"
-                          : "text-blueGray-300")
+                        'fas fa-table mr-2 text-sm ' +
+                        (router.pathname.indexOf('/admin/tables') !== -1
+                          ? 'opacity-75'
+                          : 'text-blueGray-300')
                       }
-                    ></i>{" "}
+                    ></i>{' '}
                     Tables
                   </a>
                 </Link>
@@ -166,20 +166,20 @@ export default function Sidebar() {
                   <a
                     href="#pablo"
                     className={
-                      "text-xs uppercase py-3 font-bold block " +
-                      (router.pathname.indexOf("/admin/maps") !== -1
-                        ? "text-lightBlue-500 hover:text-lightBlue-600"
-                        : "text-blueGray-700 hover:text-blueGray-500")
+                      'text-xs uppercase py-3 font-bold block ' +
+                      (router.pathname.indexOf('/admin/maps') !== -1
+                        ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                        : 'text-blueGray-700 hover:text-blueGray-500')
                     }
                   >
                     <i
                       className={
-                        "fas fa-map-marked mr-2 text-sm " +
-                        (router.pathname.indexOf("/admin/maps") !== -1
-                          ? "opacity-75"
-                          : "text-blueGray-300")
+                        'fas fa-map-marked mr-2 text-sm ' +
+                        (router.pathname.indexOf('/admin/maps') !== -1
+                          ? 'opacity-75'
+                          : 'text-blueGray-300')
                       }
-                    ></i>{" "}
+                    ></i>{' '}
                     Maps
                   </a>
                 </Link>
@@ -201,7 +201,7 @@ export default function Sidebar() {
                     href="#pablo"
                     className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}
+                    <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{' '}
                     Login
                   </a>
                 </Link>
@@ -213,7 +213,7 @@ export default function Sidebar() {
                     href="#pablo"
                     className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>{" "}
+                    <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>{' '}
                     Register
                   </a>
                 </Link>
@@ -235,7 +235,7 @@ export default function Sidebar() {
                     href="#pablo"
                     className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{" "}
+                    <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{' '}
                     Landing Page
                   </a>
                 </Link>
@@ -247,7 +247,7 @@ export default function Sidebar() {
                     href="#pablo"
                     className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                   >
-                    <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}
+                    <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{' '}
                     Profile Page
                   </a>
                 </Link>

@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function CardStats({
   statSubtitle,
@@ -27,7 +27,7 @@ export default function CardStats({
             <div className="relative w-auto pl-4 flex-initial">
               <div
                 className={
-                  "text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full " +
+                  'text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 shadow-lg rounded-full ' +
                   statIconColor
                 }
               >
@@ -36,16 +36,16 @@ export default function CardStats({
             </div>
           </div>
           <p className="text-sm text-blueGray-400 mt-4">
-            <span className={statPercentColor + " mr-2"}>
+            <span className={statPercentColor + ' mr-2'}>
               <i
                 className={
-                  statArrow === "up"
-                    ? "fas fa-arrow-up"
-                    : statArrow === "down"
-                    ? "fas fa-arrow-down"
-                    : ""
+                  statArrow === 'up'
+                    ? 'fas fa-arrow-up'
+                    : statArrow === 'down'
+                    ? 'fas fa-arrow-down'
+                    : ''
                 }
-              ></i>{" "}
+              ></i>{' '}
               {statPercent}%
             </span>
             <span className="whitespace-nowrap">{statDescripiron}</span>
@@ -57,20 +57,20 @@ export default function CardStats({
 }
 
 CardStats.defaultProps = {
-  statSubtitle: "Traffic",
-  statTitle: "350,897",
-  statArrow: "up",
-  statPercent: "3.48",
-  statPercentColor: "text-emerald-500",
-  statDescripiron: "Since last month",
-  statIconName: "far fa-chart-bar",
-  statIconColor: "bg-red-500",
+  statSubtitle: 'Traffic',
+  statTitle: '350,897',
+  statArrow: 'up',
+  statPercent: '3.48',
+  statPercentColor: 'text-emerald-500',
+  statDescripiron: 'Since last month',
+  statIconName: 'far fa-chart-bar',
+  statIconColor: 'bg-red-500',
 };
 
 CardStats.propTypes = {
   statSubtitle: PropTypes.string,
   statTitle: PropTypes.string,
-  statArrow: PropTypes.oneOf(["up", "down"]),
+  statArrow: PropTypes.oneOf(['up', 'down']),
   statPercent: PropTypes.string,
   // can be any of the text color utilities
   // from tailwindcss
