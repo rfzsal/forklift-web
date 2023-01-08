@@ -47,7 +47,7 @@ const Leader = ({ children }) => {
     {
       label: 'Keluar',
       icon: 'fas fa-sign-out-alt',
-      path: '/keluar',
+      path: '/auth/keluar',
     },
   ];
 

@@ -9,6 +9,8 @@ import PageChange from 'components/PageChange/PageChange.js';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'styles/tailwind.css';
 
+import { ProvideAuth } from 'hooks/useAuth';
+
 Router.events.on('routeChangeStart', (url) => {
   console.log(`Loading: ${url}`);
   document.body.classList.add('body-page-transition');
@@ -72,9 +74,12 @@ export default class MyApp extends App {
           />
           <title>Cek Forklift - Gajah Tunggal</title>
         </Head>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+
+        <ProvideAuth>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ProvideAuth>
       </React.Fragment>
     );
   }
