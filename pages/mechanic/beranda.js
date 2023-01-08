@@ -1,3 +1,4 @@
+import { withSessionSsr } from 'lib/session';
 import CardRiwayat from 'views/mechanic/riwayat-pengecekan/CardRiwayat';
 import CardKomponen from 'views/beranda/CardKomponen';
 import Mechanic from 'layouts/Mechanic';
@@ -18,5 +19,29 @@ const Beranda = () => {
 };
 
 Beranda.layout = Mechanic;
+
+export const getServerSideProps = withSessionSsr(
+  async function getServerSideProps({ req, res }) {
+    const user = req.session.user;
+
+    if (!user) {
+      return {
+        notFound: true,
+      };
+    }
+
+    if (user.role !== 'mechanic') {
+      return {
+        notFound: true,
+      };
+    }
+
+    return {
+      props: {
+        user: req.session.user,
+      },
+    };
+  }
+);
 
 export default Beranda;

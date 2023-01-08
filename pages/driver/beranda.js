@@ -24,6 +24,12 @@ export const getServerSideProps = withSessionSsr(
   async function getServerSideProps({ req, res }) {
     const user = req.session.user;
 
+    if (!user) {
+      return {
+        notFound: true,
+      };
+    }
+
     if (user.role !== 'driver') {
       return {
         notFound: true,

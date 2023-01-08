@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
+import { withSessionSsr } from 'lib/session';
 import { useAuth } from 'hooks/useAuth';
 import Auth from 'layouts/Auth.js';
 
@@ -102,5 +103,24 @@ const Masuk = () => {
 };
 
 Masuk.layout = Auth;
+
+export const getServerSideProps = withSessionSsr(
+  async function getServerSideProps({ req }) {
+    const user = req.session.user;
+
+    if (user) {
+      return {
+        redirect: {
+          permanent: false,
+          destination: `/${user.role}`,
+        },
+      };
+    }
+
+    return {
+      props: {},
+    };
+  }
+);
 
 export default Masuk;
