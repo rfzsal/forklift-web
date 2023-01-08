@@ -4219,3 +4219,13 @@ select {
 
 @media (min-width: 1536px) {
 }
+
+.disabled\:border-blueGray-200:disabled {
+  --tw-border-opacity: 1;
+  border-color: rgba(226, 232, 240, var(--tw-border-opacity));
+}
+
+.disabled\:bg-blueGray-100:disabled {
+  --tw-bg-opacity: 1;
+  background-color: rgba(241, 245, 249, var(--tw-bg-opacity));
+}

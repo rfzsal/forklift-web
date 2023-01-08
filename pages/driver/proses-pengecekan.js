@@ -1,7 +1,12 @@
 import Driver from 'layouts/Driver';
+import CardPengecekan from 'views/driver/proses-pengecekan/CardPengecekan';
 
 const ProsesPengecekan = () => {
-  return null;
+  return (
+    <div className="flex flex-wrap">
+      <CardPengecekan />
+    </div>
+  );
 };
 
 ProsesPengecekan.layout = Driver;
