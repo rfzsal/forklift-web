@@ -1,9 +1,14 @@
-import Leader from 'layouts/Leader';
+const { useRouter } = require('next/router');
+const { useEffect } = require('react');
 
-const Beranda = () => {
+const Leader = () => {
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace('/leader/beranda');
+  }, [router]);
+
   return null;
 };
 
-Beranda.layout = Leader;
-
-export default Beranda;
+export default Leader;
