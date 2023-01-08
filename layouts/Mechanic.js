@@ -1,13 +1,11 @@
 import { useRouter } from 'next/router';
 
-import { useAuth } from 'hooks/useAuth';
 import DashboardNavbar from 'components/Navbars/DashboardNavbar';
 import Sidebar from 'components/Sidebar/Sidebar.js';
 import DashboardHeader from 'components/Headers/DashboardHeader';
 
 const Mechanic = ({ children }) => {
   const router = useRouter();
-  const auth = useAuth();
 
   const fullRoutes = router.pathname.split('/');
   fullRoutes.shift();
@@ -55,9 +53,9 @@ const Mechanic = ({ children }) => {
 
   return (
     <>
-      <Sidebar routes={sidebarRoutes} role={auth.user.role} />
+      <Sidebar routes={sidebarRoutes} role="driver" />
       <div className="relative md:ml-64 bg-blueGray-100 min-h-screen">
-        <DashboardNavbar routes={routesHistory} role={auth.user.role} />
+        <DashboardNavbar routes={routesHistory} role="driver" />
 
         <DashboardHeader />
         <div className="px-4 md:px-10 mx-auto w-full -mt-32">{children}</div>
