@@ -60,7 +60,7 @@ const FilterRiwayat = () => {
               </div>
             </div>
 
-            <div class="w-full text-left px-4 py-2">
+            <div className="w-full text-left px-4 py-2">
               <button className="inline-block w-full lg:w-auto bg-indigo-500 text-white active:bg-indigo-600 font-semibold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
                 Filter Riwayat Pengecekan
               </button>
