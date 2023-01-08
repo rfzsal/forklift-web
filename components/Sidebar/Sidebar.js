@@ -71,21 +71,29 @@ const Sidebar = ({ routes }) => {
             </div>
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-              {routes.map((route) => {
+              {routes.map((route, index) => {
                 if (route.divider) {
-                  return <hr className="my-4 md:min-w-full" />;
+                  return (
+                    <hr
+                      key={route.divider + index}
+                      className="my-4 md:min-w-full"
+                    />
+                  );
                 }
 
                 if (route.header) {
                   return (
-                    <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+                    <h6
+                      key={route.header + index}
+                      className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+                    >
                       {route.header}
                     </h6>
                   );
                 }
 
                 return (
-                  <li className="items-center">
+                  <li key={route.label + index} className="items-center">
                     <Link href={route.path}>
                       <a
                         href={route.path}
