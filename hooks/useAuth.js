@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext(null);
@@ -37,6 +37,10 @@ const useProvideAuth = () => {
       return [error, null];
     }
   };
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return { user, login, logout };
 };

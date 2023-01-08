@@ -3,7 +3,7 @@ import Link from 'next/link';
 import UserDropdown from 'components/Dropdowns/UserDropdown.js';
 import NotificationDropdown from 'components/Dropdowns/NotificationDropdown.js';
 
-const DashboardNavbar = ({ routes }) => {
+const DashboardNavbar = ({ routes, role }) => {
   return (
     <>
       <nav className="absolute top-0 left-0 w-full z-10 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
@@ -30,7 +30,7 @@ const DashboardNavbar = ({ routes }) => {
               <NotificationDropdown />
             </li>
             <li>
-              <UserDropdown avatarSeed="leader" />
+              <UserDropdown avatarSeed={role} />
             </li>
           </ul>
         </div>

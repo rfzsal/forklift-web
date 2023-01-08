@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import NotificationDropdown from 'components/Dropdowns/NotificationDropdown.js';
 import UserDropdown from 'components/Dropdowns/UserDropdown.js';
 
-const Sidebar = ({ routes }) => {
+const Sidebar = ({ routes, role }) => {
   const [collapseShow, setCollapseShow] = useState('hidden');
   const router = useRouter();
 
@@ -35,7 +35,7 @@ const Sidebar = ({ routes }) => {
               <NotificationDropdown />
             </li>
             <li className="inline-block relative">
-              <UserDropdown avatarSeed="leader" />
+              <UserDropdown avatarSeed={role} />
             </li>
           </ul>
 
