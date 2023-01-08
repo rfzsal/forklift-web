@@ -35,7 +35,7 @@ const Sidebar = ({ routes }) => {
               <NotificationDropdown />
             </li>
             <li className="inline-block relative">
-              <UserDropdown avatarSeed={Date.now()} />
+              <UserDropdown avatarSeed="leader" />
             </li>
           </ul>
 
