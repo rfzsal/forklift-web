@@ -92,7 +92,7 @@ const Sidebar = ({ routes }) => {
                         className={
                           'text-xs uppercase py-3 font-bold block ' +
                           (router.pathname.indexOf(route.path) !== -1
-                            ? 'text-lightBlue-500 hover:text-lightBlue-600'
+                            ? 'text-indigo-600'
                             : 'text-blueGray-700 hover:text-blueGray-500')
                         }
                       >
