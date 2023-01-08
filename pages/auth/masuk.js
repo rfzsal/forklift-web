@@ -1,8 +1,6 @@
-import React from 'react';
-
 import Auth from 'layouts/Auth.js';
 
-export default function Login() {
+const Masuk = () => {
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -61,6 +59,8 @@ export default function Login() {
       </div>
     </>
   );
-}
+};
 
-Login.layout = Auth;
+Masuk.layout = Auth;
+
+export default Masuk;
