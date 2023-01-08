@@ -19,4 +19,4 @@ const Beranda = () => {
 
 Beranda.layout = Mechanic;
 
-export default Mechanic;
+export default Beranda;
