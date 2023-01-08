@@ -54,7 +54,7 @@ const Driver = ({ children }) => {
   return (
     <>
       <Sidebar routes={sidebarRoutes} />
-      <div className="relative md:ml-64 bg-blueGray-100">
+      <div className="relative md:ml-64 bg-blueGray-100 min-h-screen">
         <DashboardNavbar routes={routesHistory} />
 
         <DashboardHeader />
