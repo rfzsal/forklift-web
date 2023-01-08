@@ -26,9 +26,9 @@ const Driver = ({ children }) => {
     { divider: true },
     { header: 'Pengecekan Forklift' },
     {
-      label: 'Cek Forklift',
+      label: 'Proses Pengecekan',
       icon: 'fas fa-search',
-      path: '/driver/cek-forklift',
+      path: '/driver/proses-pengecekan',
     },
     {
       label: 'Riwayat Pengecekan',
@@ -39,7 +39,7 @@ const Driver = ({ children }) => {
     { header: 'Perbaikan Forklift' },
     {
       label: 'Riwayat Perbaikan',
-      icon: 'fas fa-wrench',
+      icon: 'fas fa-cogs',
       path: '/driver/riwayat-perbaikan',
     },
     { divider: true },

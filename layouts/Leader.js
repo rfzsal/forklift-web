@@ -39,7 +39,7 @@ const Leader = ({ children }) => {
     },
     {
       label: 'Riwayat Perbaikan',
-      icon: 'fas fa-wrench',
+      icon: 'fas fa-cogs',
       path: '/leader/riwayat-perbaikan',
     },
     { divider: true },
