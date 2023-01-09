@@ -89,7 +89,14 @@ const Masuk = () => {
                       className="w-full bg-indigo-500 text-white active:bg-indigo-600 font-semibold uppercase px-3 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                       type="button"
                     >
-                      Masuk
+                      {values.loading ? (
+                        <span>
+                          <i className="fas fa-circle-notch animate-spin mx-auto text-sm mr-1"></i>{' '}
+                          <span>Masuk</span>
+                        </span>
+                      ) : (
+                        'Masuk'
+                      )}
                     </button>
                   </div>
                 </form>
