@@ -1,11 +1,13 @@
 import { withSessionSsr } from 'lib/session';
 import Leader from 'layouts/Leader';
 import CardPengajuan from 'views/leader/pengajuan-perbaikan/CardPengajuan';
+import CardReview from 'views/leader/pengajuan-perbaikan/CardReview';
 
 const PengajuanPerbaikan = () => {
   return (
     <div className="flex flex-wrap">
       <CardPengajuan />
+      <CardReview />
     </div>
   );
 };
