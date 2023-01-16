@@ -3,9 +3,16 @@ import { useRouter } from 'next/router';
 import DashboardNavbar from 'components/Navbars/DashboardNavbar';
 import Sidebar from 'components/Sidebar/Sidebar.js';
 import DashboardHeader from 'components/Headers/DashboardHeader';
+import { useAuth } from 'hooks/useAuth';
 
 const Leader = ({ children }) => {
+  const { user } = useAuth();
   const router = useRouter();
+
+  if (!user) {
+    router.replace('/auth/keluar');
+    return null;
+  }
 
   const fullRoutes = router.pathname.split('/');
   fullRoutes.shift();

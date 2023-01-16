@@ -16,6 +16,18 @@ const useAuth = () => useContext(AuthContext);
 const useProvideAuth = () => {
   const [user, setUser] = useState(null);
 
+  const refresh = async () => {
+    try {
+      const res = await axios.get('/api/auth');
+
+      if (!res.data.user) {
+        setUser(null);
+      }
+    } catch (error) {
+      return [error, null];
+    }
+  };
+
   const login = async (username, password) => {
     try {
       const res = await axios.post('/api/auth/login', { username, password });
@@ -39,7 +51,13 @@ const useProvideAuth = () => {
   };
 
   useEffect(() => {
-    console.log(user);
+    if (!user) return;
+
+    const loop = setInterval(() => {
+      refresh();
+    }, 1 * 1000);
+
+    return () => clearInterval(loop);
   }, [user]);
 
   return { user, login, logout };
