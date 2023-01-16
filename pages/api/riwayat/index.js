@@ -1,6 +1,11 @@
+import { withSessionRoute } from 'lib/session';
+
 const { query } = require('lib/server/mysql');
 
 const handler = async (req, res) => {
+  const user = req.session.user;
+  if (!user) return res.status(401).end();
+
   const { id, from, to, status } = req.query;
 
   if (!id && !from && !to && !status) {
@@ -70,4 +75,4 @@ const handler = async (req, res) => {
   res.status(400).end();
 };
 
-export default handler;
+export default withSessionRoute(handler);

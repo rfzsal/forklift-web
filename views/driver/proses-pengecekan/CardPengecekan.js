@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import coreAPI from 'utils/coreAPI';
+
 const CardHeader = ({ title, actionButton }) => {
   return (
     <div className="rounded-t mb-0 px-4 py-3 border-b">
@@ -18,17 +20,29 @@ const CardHeader = ({ title, actionButton }) => {
 const StatusCheck = ({
   title,
   detailPlaceholder,
-  status,
   onChangeStatus,
-  details,
   onChangeDetails,
+  disabled,
   mt = 0,
 }) => {
+  const [statusData, setStatusData] = useState('Baik');
+  const [detailsData, setDetailsData] = useState('');
+
   const handleStatusChange = (e) => {
+    setStatusData(e.target.value);
+
+    if (e.target.value === 'Baik') {
+      setDetailsData('');
+      onChangeDetails('');
+    }
+
     onChangeStatus(e.target.value);
   };
 
   const handleDetailChange = (e) => {
+    if (statusData === 'Baik') return;
+
+    setDetailsData(e.target.value);
     onChangeDetails(e.target.value);
   };
 
@@ -40,12 +54,13 @@ const StatusCheck = ({
             {title}
           </label>
           <select
+            disabled={disabled}
             onChange={handleStatusChange}
-            value={status}
-            className="border border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
+            value={statusData}
+            className="border disabled:border-blueGray-200 disabled:bg-blueGray-100 border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
           >
-            <option value="baik">Baik</option>
-            <option value="kurang baik">Kurang Baik</option>
+            <option value="Baik">Baik</option>
+            <option value="Kurang Baik">Kurang Baik</option>
           </select>
         </div>
       </div>
@@ -55,11 +70,11 @@ const StatusCheck = ({
             Keterangan {title}
           </label>
           <input
+            disabled={disabled || statusData === 'Baik'}
             onChange={handleDetailChange}
-            value={details}
-            disabled={status === 'baik'}
+            value={detailsData}
             type="text"
-            placeholder={status !== 'baik' ? detailPlaceholder : ''}
+            placeholder={statusData !== 'Baik' ? detailPlaceholder : ''}
             className="border border-blueGray-300 disabled:border-blueGray-200 disabled:bg-blueGray-100 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
           />
         </div>
@@ -71,46 +86,58 @@ const StatusCheck = ({
 const CardPengecekan = () => {
   const [values, setValues] = useState({
     namaDriver: '',
-    shiftDriver: 'pagi',
+    shiftDriver: 'Pagi',
     idForklift: '',
-    ban: 'baik',
+    ban: 'Baik',
     keteranganBan: '',
-    fork: 'baik',
+    fork: 'Baik',
     keteranganFork: '',
-    seatBelt: 'baik',
+    seatBelt: 'Baik',
     keteranganSeatBelt: '',
-    lampuDepanBelakang: 'baik',
+    lampuDepanBelakang: 'Baik',
     keteranganLampuDepanBelakang: '',
-    remTanganKaki: 'baik',
+    remTanganKaki: 'Baik',
     keteranganRemTanganKaki: '',
-    lampuSein: 'baik',
+    lampuSein: 'Baik',
     keteranganLampuSein: '',
-    klakson: 'baik',
+    klakson: 'Baik',
     keteranganKlakson: '',
-    alarmMundur: 'baik',
+    alarmMundur: 'Baik',
     keteranganAlarmMundur: '',
-    lampuSirine: 'baik',
+    lampuSirine: 'Baik',
     keteranganLampuSirine: '',
-    tempatDuduk: 'baik',
+    tempatDuduk: 'Baik',
     keteranganTempatDuduk: '',
-    kacaSpion: 'baik',
+    kacaSpion: 'Baik',
     keteranganKacaSpion: '',
-    apar: 'baik',
+    apar: 'Baik',
     keteranganApar: '',
-    oli: 'baik',
+    oli: 'Baik',
     keteranganOli: '',
-    kebersihan: 'baik',
+    kebersihan: 'Baik',
     keteranganKebersihan: '',
   });
 
-  const handleChange = (props) => (newValue) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (props) => (e) => {
+    setValues({ ...values, [props]: e.target.value });
+  };
+
+  const handleStatusChange = (props) => (newValue) => {
     setValues({ ...values, [props]: newValue });
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (loading) return;
     if (!values.namaDriver || !values.shiftDriver || !values.idForklift) return;
 
-    console.log(values);
+    setLoading(true);
+    const api = new coreAPI();
+    const [error] = await api.addRiwayatPengecekan(values);
+    setLoading(false);
+
+    if (error) return alert('Pengecekan gagal');
   };
 
   return (
@@ -140,9 +167,12 @@ const CardPengecekan = () => {
                   Nama Driver
                 </label>
                 <input
+                  disabled={loading}
+                  onChange={handleChange('namaDriver')}
+                  value={values.namaDriver}
                   type="text"
                   placeholder="Irfan Hidayat"
-                  className="border border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
+                  className="border disabled:border-blueGray-200 disabled:bg-blueGray-100 border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
                 />
               </div>
             </div>
@@ -152,10 +182,15 @@ const CardPengecekan = () => {
                 <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                   Shift
                 </label>
-                <select className="border border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200">
-                  <option>Pagi</option>
-                  <option>Siang</option>
-                  <option>Sore</option>
+                <select
+                  disabled={loading}
+                  onChange={handleChange('shiftDriver')}
+                  value={values.shiftDriver}
+                  className="border disabled:border-blueGray-200 disabled:bg-blueGray-100 border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
+                >
+                  <option value="Pagi">Pagi</option>
+                  <option value="Siang">Siang</option>
+                  <option value="Malam">Malam</option>
                 </select>
               </div>
             </div>
@@ -174,9 +209,12 @@ const CardPengecekan = () => {
                   ID Forklift
                 </label>
                 <input
+                  disabled={loading}
+                  onChange={handleChange('idForklift')}
+                  value={values.idForklift}
                   type="text"
                   placeholder="A1"
-                  className="border border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
+                  className="border disabled:border-blueGray-200 disabled:bg-blueGray-100 border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
                 />
               </div>
             </div>
@@ -189,167 +227,153 @@ const CardPengecekan = () => {
           </h6>
 
           <StatusCheck
+            disabled={loading}
             title="Ban"
             detailPlaceholder="Ban kempes"
-            status={values.ban}
-            onChangeStatus={handleChange('ban')}
-            details={values.keteranganBan}
-            onChangeDetails={handleChange('keteranganBan')}
+            onChangeStatus={handleStatusChange('ban')}
+            onChangeDetails={handleStatusChange('keteranganBan')}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Fork"
             detailPlaceholder="Fork bengkok"
-            status={values.fork}
-            onChangeStatus={handleChange('fork')}
-            details={values.keteranganFork}
-            onChangeDetails={handleChange('keteranganFork')}
+            onChangeStatus={handleStatusChange('fork')}
+            onChangeDetails={handleStatusChange('keteranganFork')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Seat Belt"
             detailPlaceholder="Seat belt putus"
-            status={values.seatBelt}
-            onChangeStatus={handleChange('seatBelt')}
-            details={values.keteranganSeatBelt}
-            onChangeDetails={handleChange('keteranganSeatBelt')}
+            onChangeStatus={handleStatusChange('seatBelt')}
+            onChangeDetails={handleStatusChange('keteranganSeatBelt')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Lampu Depan dan Belakang"
             detailPlaceholder="Lampu belakang mati"
-            status={values.lampuDepanBelakang}
-            onChangeStatus={handleChange('lampuDepanBelakang')}
-            details={values.keteranganLampuDepanBelakang}
-            onChangeDetails={handleChange('keteranganLampuDepanBelakang')}
+            onChangeStatus={handleStatusChange('lampuDepanBelakang')}
+            onChangeDetails={handleStatusChange('keteranganLampuDepanBelakang')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Rem Tangan dan Kaki"
             detailPlaceholder="Rem tangan macet"
-            status={values.remTanganKaki}
-            onChangeStatus={handleChange('remTanganKaki')}
-            details={values.keteranganRemTanganKaki}
-            onChangeDetails={handleChange('keteranganRemTanganKaki')}
+            onChangeStatus={handleStatusChange('remTanganKaki')}
+            onChangeDetails={handleStatusChange('keteranganRemTanganKaki')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Lampu Sein"
             detailPlaceholder="Lampu sein kanan mati"
-            status={values.lampuSein}
-            onChangeStatus={handleChange('lampuSein')}
-            details={values.keteranganLampuSein}
-            onChangeDetails={handleChange('keteranganLampuSein')}
+            onChangeStatus={handleStatusChange('lampuSein')}
+            onChangeDetails={handleStatusChange('keteranganLampuSein')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Klakson"
             detailPlaceholder="Klakson mati"
-            status={values.klakson}
-            onChangeStatus={handleChange('klakson')}
-            details={values.keteranganKlakson}
-            onChangeDetails={handleChange('keteranganKlakson')}
+            onChangeStatus={handleStatusChange('klakson')}
+            onChangeDetails={handleStatusChange('keteranganKlakson')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Alarm Mundur"
             detailPlaceholder="Alarm mundur mati"
-            status={values.alarmMundur}
-            onChangeStatus={handleChange('alarmMundur')}
-            details={values.keteranganAlarmMundur}
-            onChangeDetails={handleChange('keteranganAlarmMundur')}
+            onChangeStatus={handleStatusChange('alarmMundur')}
+            onChangeDetails={handleStatusChange('keteranganAlarmMundur')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Lampu Sirine"
             detailPlaceholder="Lampu sirine mati"
-            status={values.lampuSirine}
-            onChangeStatus={handleChange('lampuSirine')}
-            details={values.keteranganLampuSirine}
-            onChangeDetails={handleChange('keteranganLampuSirine')}
+            onChangeStatus={handleStatusChange('lampuSirine')}
+            onChangeDetails={handleStatusChange('keteranganLampuSirine')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Tempat Duduk"
             detailPlaceholder="Tempat duduk sobek"
-            status={values.tempatDuduk}
-            onChangeStatus={handleChange('tempatDuduk')}
-            details={values.keteranganTempatDuduk}
-            onChangeDetails={handleChange('keteranganTempatDuduk')}
+            onChangeStatus={handleStatusChange('tempatDuduk')}
+            onChangeDetails={handleStatusChange('keteranganTempatDuduk')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Kaca Spion"
             detailPlaceholder="Kaca spion pecah"
-            status={values.kacaSpion}
-            onChangeStatus={handleChange('kacaSpion')}
-            details={values.keteranganKacaSpion}
-            onChangeDetails={handleChange('keteranganKacaSpion')}
+            onChangeStatus={handleStatusChange('kacaSpion')}
+            onChangeDetails={handleStatusChange('keteranganKacaSpion')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="APAR"
             detailPlaceholder="APAR hasbis"
-            status={values.apar}
-            onChangeStatus={handleChange('apar')}
-            details={values.keteranganApar}
-            onChangeDetails={handleChange('keteranganApar')}
+            onChangeStatus={handleStatusChange('apar')}
+            onChangeDetails={handleStatusChange('keteranganApar')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Oli"
             detailPlaceholder="Oli bocor"
-            status={values.oli}
-            onChangeStatus={handleChange('oli')}
-            details={values.keteranganOli}
-            onChangeDetails={handleChange('keteranganOli')}
+            onChangeStatus={handleStatusChange('oli')}
+            onChangeDetails={handleStatusChange('keteranganOli')}
             mt={2}
           />
 
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            disabled={loading}
             title="Kebersihan"
             detailPlaceholder="Forklift kotor"
-            status={values.kebersihan}
-            onChangeStatus={handleChange('kebersihan')}
-            details={values.keteranganKebersihan}
-            onChangeDetails={handleChange('keteranganKebersihan')}
+            onChangeStatus={handleStatusChange('kebersihan')}
+            onChangeDetails={handleStatusChange('keteranganKebersihan')}
             mt={2}
           />
         </div>
@@ -359,7 +383,14 @@ const CardPengecekan = () => {
             onClick={handleSubmit}
             className="inline-block w-full lg:w-auto bg-indigo-500 text-white active:bg-indigo-600 font-semibold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
           >
-            Kirim Status Pengecekan
+            {loading ? (
+              <span>
+                <i className="fas fa-circle-notch animate-spin mx-auto text-sm mr-1"></i>{' '}
+                <span>Mengirim...</span>
+              </span>
+            ) : (
+              'Kirim Status Pengecekan'
+            )}
           </button>
         </div>
       </div>
