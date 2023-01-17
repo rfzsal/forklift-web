@@ -15,13 +15,31 @@ class coreAPI {
     try {
       if (filter) {
         const res = await axios.get(
-          `/api/riwayat?from=${filter.from}&to=${filter.to}&status=${filter.status}`
+          `/api/pengecekan?from=${filter.from}&to=${filter.to}&status=${filter.status}`
         );
 
         return [null, res.data.data];
       }
 
       const res = await axios.get('/api/pengecekan');
+
+      return [null, res.data.data];
+    } catch (error) {
+      return [error, null];
+    }
+  }
+
+  async getRiwayatPerbaikan(filter) {
+    try {
+      if (filter) {
+        const res = await axios.get(
+          `/api/perbaikan?from=${filter.from}&to=${filter.to}&status=${filter.status}`
+        );
+
+        return [null, res.data.data];
+      }
+
+      const res = await axios.get('/api/perbaikan');
 
       return [null, res.data.data];
     } catch (error) {
