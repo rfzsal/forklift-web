@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 
 import { withSessionSsr } from 'lib/session';
 import CardRiwayat from 'views/driver/riwayat-pengecekan/CardRiwayat';
@@ -8,14 +8,27 @@ import coreAPI from 'utils/coreAPI';
 
 const RiwayatPengecekan = () => {
   const [riwayat, setRiwayat] = useState(null);
+  const riwayatRef = useRef(null);
 
-  const refresh = async () => {
+  const refresh = async (filter) => {
     const api = new coreAPI();
 
-    const [error, data] = await api.getRiwayatPengecekan();
+    const [error, data] = filter
+      ? await api.getRiwayatPengecekan(filter)
+      : await api.getRiwayatPengecekan();
 
     if (error) return setRiwayat([]);
+
+    if (!filter) riwayatRef.current = data;
     setRiwayat(data);
+  };
+
+  const handleFilter = (values) => {
+    refresh(values);
+  };
+
+  const handleResetFilter = () => {
+    setRiwayat(riwayatRef.current);
   };
 
   useEffect(() => {
@@ -24,7 +37,11 @@ const RiwayatPengecekan = () => {
 
   return (
     <div className="flex flex-wrap">
-      <FilterRiwayat />
+      <FilterRiwayat
+        onFilter={handleFilter}
+        onResetFilter={handleResetFilter}
+      />
+
       <CardRiwayat data={riwayat} />
     </div>
   );

@@ -60,16 +60,28 @@ const handler = async (req, res) => {
   }
 
   if (from && to && status) {
-    const sql = `
-    SELECT
-    id, id_forklift, nama_driver, shift_driver, status, UNIX_TIMESTAMP(timestampp)
-    FROM data_pengecekan 
-    WHERE status = ?
-    AND timestamp BETWEEN FROM_UNIXTIME(?) AND FROM_UNIXTIME(?)
-    ORDER BY timestamp DESC
-    `;
+    let sql = '';
 
-    const values = [status, from, to];
+    if (status !== 'Semua Status') {
+      sql = `
+      SELECT
+      id, id_forklift, nama_driver, shift_driver, status, UNIX_TIMESTAMP(timestamp) as timestamp
+      FROM data_pengecekan 
+      WHERE status = ?
+      AND DATE(timestamp) BETWEEN ? AND ?
+      ORDER BY timestamp DESC
+      `;
+    } else {
+      sql = `
+      SELECT
+      id, id_forklift, nama_driver, shift_driver, status, UNIX_TIMESTAMP(timestamp) as timestamp
+      FROM data_pengecekan 
+      WHERE DATE(timestamp) BETWEEN ? AND ?
+      ORDER BY timestamp DESC
+      `;
+    }
+
+    const values = status !== 'Semua Status' ? [status, from, to] : [from, to];
 
     const [error, rows] = await query(sql, values);
     if (error) return res.status(500).send(error);

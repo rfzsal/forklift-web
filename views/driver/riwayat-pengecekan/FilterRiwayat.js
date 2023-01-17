@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 const CardHeader = ({ title, actionButton }) => {
   return (
     <div className="rounded-t mb-0 px-4 py-3 border-b">
@@ -13,7 +15,29 @@ const CardHeader = ({ title, actionButton }) => {
   );
 };
 
-const FilterRiwayat = () => {
+const FilterRiwayat = ({ onFilter, onResetFilter }) => {
+  const [values, setValues] = useState({
+    from: '',
+    to: '',
+    status: 'Semua Status',
+  });
+
+  const handleChange = (prop) => (e) => {
+    setValues({ ...values, [prop]: e.target.value });
+  };
+
+  const handleFilter = () => {
+    if (!values.from || !values.to || !values.status) return;
+
+    onFilter(values);
+  };
+
+  const handleResetFilter = () => {
+    setValues({ from: '', to: '', status: 'Semua Status' });
+
+    onResetFilter();
+  };
+
   return (
     <div className="w-full px-4">
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-sm rounded">
@@ -27,6 +51,8 @@ const FilterRiwayat = () => {
                   Tanggal Dari
                 </label>
                 <input
+                  onChange={handleChange('from')}
+                  value={values.from}
                   type="date"
                   placeholder="Irfan Hidayat"
                   className="border border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
@@ -40,6 +66,8 @@ const FilterRiwayat = () => {
                   Tanggal Ke
                 </label>
                 <input
+                  onChange={handleChange('to')}
+                  value={values.to}
                   type="date"
                   placeholder="Irfan Hidayat"
                   className="border border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
@@ -52,18 +80,34 @@ const FilterRiwayat = () => {
                 <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                   Status
                 </label>
-                <select className="border border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200">
-                  <option>Semua Status</option>
-                  <option>Baik</option>
-                  <option>Kurang Baik</option>
+                <select
+                  onChange={handleChange('status')}
+                  value={values.status}
+                  className="border border-blueGray-300 px-3 py-3 text-sm  w-full placeholder-blueGray-200 text-blueGray-700 relative bg-white rounded-md outline-none focus:ring focus:ring-indigo-200"
+                >
+                  <option value="Semua Status">Semua Status</option>
+                  <option value="Baik">Baik</option>
+                  <option value="Kurang Baik">Kurang Baik</option>
                 </select>
               </div>
             </div>
 
             <div className="w-full text-left px-4 py-2">
-              <button className="inline-block w-full lg:w-auto bg-indigo-500 text-white active:bg-indigo-600 font-semibold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150">
+              <button
+                onClick={handleFilter}
+                className="inline-block w-full lg:w-auto bg-indigo-500 text-white active:bg-indigo-600 font-semibold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+              >
                 Filter Riwayat Pengecekan
               </button>
+
+              {values.from && values.to && values.status && (
+                <button
+                  onClick={handleResetFilter}
+                  className="inline-block w-full lg:w-auto font-semibold uppercase px-3 py-1 rounded outline-none focus:outline-none mt-2"
+                >
+                  Reset
+                </button>
+              )}
             </div>
           </div>
         </div>

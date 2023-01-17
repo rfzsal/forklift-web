@@ -11,8 +11,16 @@ class coreAPI {
     }
   }
 
-  async getRiwayatPengecekan(from, to) {
+  async getRiwayatPengecekan(filter) {
     try {
+      if (filter) {
+        const res = await axios.get(
+          `/api/riwayat?from=${filter.from}&to=${filter.to}&status=${filter.status}`
+        );
+
+        return [null, res.data.data];
+      }
+
       const res = await axios.get('/api/riwayat');
 
       return [null, res.data.data];
