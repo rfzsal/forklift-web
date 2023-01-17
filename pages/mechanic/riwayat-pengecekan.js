@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react';
 import { withSessionSsr } from 'lib/session';
 import CardRiwayat from 'views/shared/riwayat-pengecekan/CardRiwayat';
 import FilterRiwayat from 'views/shared/riwayat-pengecekan/FilterRiwayat';
-import Driver from 'layouts/Driver';
+import Mechanic from 'layouts/Mechanic';
 import coreAPI from 'utils/coreAPI';
 
 const RiwayatPengecekan = () => {
@@ -47,7 +47,7 @@ const RiwayatPengecekan = () => {
   );
 };
 
-RiwayatPengecekan.layout = Driver;
+RiwayatPengecekan.layout = Mechanic;
 
 export const getServerSideProps = withSessionSsr(
   async function getServerSideProps({ req, res }) {
