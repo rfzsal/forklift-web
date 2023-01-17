@@ -3,7 +3,7 @@ import axios from 'axios';
 class coreAPI {
   async addRiwayatPengecekan(data) {
     try {
-      const res = await axios.post('/api/riwayat/add', data);
+      const res = await axios.post('/api/pengecekan/add', data);
 
       return [null, res.data];
     } catch (error) {
@@ -21,7 +21,7 @@ class coreAPI {
         return [null, res.data.data];
       }
 
-      const res = await axios.get('/api/riwayat');
+      const res = await axios.get('/api/pengecekan');
 
       return [null, res.data.data];
     } catch (error) {
