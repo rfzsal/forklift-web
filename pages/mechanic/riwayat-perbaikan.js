@@ -1,13 +1,48 @@
+import { useEffect, useState, useRef } from 'react';
+
 import { withSessionSsr } from 'lib/session';
-import FilterRiwayat from 'views/mechanic/riwayat-perbaikan/FilterRiwayat';
-import CardRiwayat from 'views/mechanic/riwayat-perbaikan/CardRiwayat';
+import CardRiwayat from 'views/shared/riwayat-pengecekan/CardRiwayatPerbaikan';
+import FilterRiwayat from 'views/shared/riwayat-pengecekan/FilterRiwayatPerbaikan';
 import Mechanic from 'layouts/Mechanic';
+import coreAPI from 'utils/coreAPI';
 
 const RiwayatPerbaikan = () => {
+  const [riwayat, setRiwayat] = useState(null);
+  const riwayatRef = useRef(null);
+
+  const refresh = async (filter) => {
+    const api = new coreAPI();
+
+    const [error, data] = filter
+      ? await api.getRiwayatPerbaikan(filter)
+      : await api.getRiwayatPerbaikan();
+
+    if (error) return setRiwayat([]);
+
+    if (!filter) riwayatRef.current = data;
+    setRiwayat(data);
+  };
+
+  const handleFilter = (values) => {
+    refresh(values);
+  };
+
+  const handleResetFilter = () => {
+    setRiwayat(riwayatRef.current);
+  };
+
+  useEffect(() => {
+    refresh();
+  }, []);
+
   return (
     <div className="flex flex-wrap">
-      <FilterRiwayat />
-      <CardRiwayat />
+      <FilterRiwayat
+        onFilter={handleFilter}
+        onResetFilter={handleResetFilter}
+      />
+
+      <CardRiwayat data={riwayat} />
     </div>
   );
 };
