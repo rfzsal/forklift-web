@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import coreAPI from 'utils/coreAPI';
 
@@ -23,6 +23,7 @@ const StatusCheck = ({
   onChangeStatus,
   onChangeDetails,
   disabled,
+  reset,
   mt = 0,
 }) => {
   const [statusData, setStatusData] = useState('Baik');
@@ -45,6 +46,16 @@ const StatusCheck = ({
     setDetailsData(e.target.value);
     onChangeDetails(e.target.value);
   };
+
+  useEffect(() => {
+    if (!reset) return;
+
+    setStatusData('Baik');
+    setDetailsData('');
+
+    onChangeStatus('Baik');
+    onChangeDetails('');
+  }, [reset, onChangeStatus, onChangeDetails]);
 
   return (
     <div className={`flex flex-wrap mt-${mt}`}>
@@ -119,6 +130,7 @@ const CardPengecekan = () => {
   });
 
   const [loading, setLoading] = useState(false);
+  const [resetStatus, setResetStatus] = useState(false);
 
   const handleChange = (props) => (e) => {
     setValues({ ...values, [props]: e.target.value });
@@ -138,6 +150,43 @@ const CardPengecekan = () => {
     setLoading(false);
 
     if (error) return alert('Pengecekan gagal');
+    alert('Pengecekan berhasil');
+
+    setResetStatus(true);
+    setResetStatus(false);
+    setValues({
+      namaDriver: '',
+      shiftDriver: 'Pagi',
+      idForklift: '',
+      ban: 'Baik',
+      keteranganBan: '',
+      fork: 'Baik',
+      keteranganFork: '',
+      seatBelt: 'Baik',
+      keteranganSeatBelt: '',
+      lampuDepanBelakang: 'Baik',
+      keteranganLampuDepanBelakang: '',
+      remTanganKaki: 'Baik',
+      keteranganRemTanganKaki: '',
+      lampuSein: 'Baik',
+      keteranganLampuSein: '',
+      klakson: 'Baik',
+      keteranganKlakson: '',
+      alarmMundur: 'Baik',
+      keteranganAlarmMundur: '',
+      lampuSirine: 'Baik',
+      keteranganLampuSirine: '',
+      tempatDuduk: 'Baik',
+      keteranganTempatDuduk: '',
+      kacaSpion: 'Baik',
+      keteranganKacaSpion: '',
+      apar: 'Baik',
+      keteranganApar: '',
+      oli: 'Baik',
+      keteranganOli: '',
+      kebersihan: 'Baik',
+      keteranganKebersihan: '',
+    });
   };
 
   return (
@@ -227,6 +276,7 @@ const CardPengecekan = () => {
           </h6>
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Ban"
             detailPlaceholder="Ban kempes"
@@ -237,6 +287,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Fork"
             detailPlaceholder="Fork bengkok"
@@ -248,6 +299,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Seat Belt"
             detailPlaceholder="Seat belt putus"
@@ -259,6 +311,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Lampu Depan dan Belakang"
             detailPlaceholder="Lampu belakang mati"
@@ -270,6 +323,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Rem Tangan dan Kaki"
             detailPlaceholder="Rem tangan macet"
@@ -281,6 +335,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Lampu Sein"
             detailPlaceholder="Lampu sein kanan mati"
@@ -292,6 +347,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Klakson"
             detailPlaceholder="Klakson mati"
@@ -303,6 +359,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Alarm Mundur"
             detailPlaceholder="Alarm mundur mati"
@@ -314,6 +371,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Lampu Sirine"
             detailPlaceholder="Lampu sirine mati"
@@ -325,6 +383,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Tempat Duduk"
             detailPlaceholder="Tempat duduk sobek"
@@ -336,6 +395,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Kaca Spion"
             detailPlaceholder="Kaca spion pecah"
@@ -347,6 +407,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="APAR"
             detailPlaceholder="APAR hasbis"
@@ -358,6 +419,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Oli"
             detailPlaceholder="Oli bocor"
@@ -369,6 +431,7 @@ const CardPengecekan = () => {
           <hr className="block lg:hidden mt-4 mb-6" />
 
           <StatusCheck
+            reset={resetStatus}
             disabled={loading}
             title="Kebersihan"
             detailPlaceholder="Forklift kotor"
