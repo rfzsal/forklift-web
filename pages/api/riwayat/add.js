@@ -67,6 +67,7 @@ const handler = async (req, res) => {
   }
 
   const id = Math.floor(100000000 + Math.random() * 900000000);
+  const currentTimestamp = Date.now();
 
   const sql1 = `INSERT INTO data_pengecekan VALUES (?, ?, ?, ?, ?, ?)`;
   const values1 = [
@@ -75,13 +76,20 @@ const handler = async (req, res) => {
     namaDriver,
     shiftDriver,
     status,
-    format(Date.now(), 'yyyy-MM-dd hh:mm:ss'),
+    format(currentTimestamp, 'yyyy-MM-dd hh:mm:ss'),
   ];
 
-  const sql2 =
+  const sql2 = `INSERT INTO data_perbaikan VALUES(?, ?, NULL, NULL, NULL, NULL, 'Belum Diperbaiki', ?)`;
+  const values2 = [
+    id,
+    idForklift,
+    format(currentTimestamp, 'yyyy-MM-dd hh:mm:ss'),
+  ];
+
+  const sql3 =
     'INSERT INTO detail_pengecekan VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
 
-  const values2 = [
+  const values3 = [
     id,
     ban === 'Kurang Baik' ? keteranganBan || 'Ada kerusakan' : null,
     fork === 'Kurang Baik' ? keteranganFork || 'Ada kerusakan' : null,
@@ -112,8 +120,14 @@ const handler = async (req, res) => {
   ];
 
   const [error1] = await query(sql1, values1);
-  const [error2] = await query(sql2, values2);
-  if (error1 || error2) return res.status(500).send({ error1, error2 });
+
+  const [error2] =
+    status === 'Kurang Baik' ? await query(sql2, values2) : [null];
+
+  const [error3] = await query(sql3, values3);
+
+  if (error1 || error2 || error3)
+    return res.status(500).send({ error1, error3 });
 
   res.status(200).end();
 };
