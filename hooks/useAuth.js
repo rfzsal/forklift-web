@@ -60,7 +60,7 @@ const useProvideAuth = () => {
     return () => clearInterval(loop);
   }, [user]);
 
-  return { user, login, logout };
+  return { user, login, logout, refresh };
 };
 
 export { ProvideAuth, useAuth };

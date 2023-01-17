@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import DashboardNavbar from 'components/Navbars/DashboardNavbar';
@@ -6,13 +7,8 @@ import DashboardHeader from 'components/Headers/DashboardHeader';
 import { useAuth } from 'hooks/useAuth';
 
 const Leader = ({ children }) => {
-  const { user } = useAuth();
+  const { user, refresh } = useAuth();
   const router = useRouter();
-
-  if (!user) {
-    router.replace('/auth/keluar');
-    return null;
-  }
 
   const fullRoutes = router.pathname.split('/');
   fullRoutes.shift();
@@ -57,6 +53,13 @@ const Leader = ({ children }) => {
       path: '/auth/keluar',
     },
   ];
+
+  useEffect(() => {
+    if (!user) {
+      refresh();
+      return null;
+    }
+  }, [user, refresh]);
 
   return (
     <>
