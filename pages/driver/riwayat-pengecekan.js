@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
 
 import { withSessionSsr } from 'lib/session';
-import CardRiwayat from 'views/driver/riwayat-pengecekan/CardRiwayat';
-import FilterRiwayat from 'views/driver/riwayat-pengecekan/FilterRiwayat';
+import CardRiwayat from 'views/shared/riwayat-pengecekan/CardRiwayat';
+import FilterRiwayat from 'views/shared/riwayat-pengecekan/FilterRiwayat';
 import Driver from 'layouts/Driver';
 import coreAPI from 'utils/coreAPI';
 
