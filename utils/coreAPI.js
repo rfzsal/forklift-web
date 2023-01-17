@@ -10,6 +10,16 @@ class coreAPI {
       return [error, null];
     }
   }
+
+  async getRiwayatPengecekan(from, to) {
+    try {
+      const res = await axios.get('/api/riwayat');
+
+      return [null, res.data.data];
+    } catch (error) {
+      return [error, null];
+    }
+  }
 }
 
 export default coreAPI;
