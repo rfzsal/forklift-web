@@ -52,6 +52,34 @@ const handler = async (req, res) => {
     return res.status(200).send({ data: rows });
   }
 
+  if (status) {
+    let sql = '';
+
+    if (status !== 'Semua Status') {
+      sql = `
+      SELECT
+      id, id_forklift, nama_mechanic, shift_mechanic, nama_leader, shift_leader, status, UNIX_TIMESTAMP(timestamp) as timestamp
+      FROM data_perbaikan 
+      WHERE status = ?
+      ORDER BY timestamp DESC
+      `;
+    } else {
+      sql = `
+      SELECT
+      id, id_forklift, nama_mechanic, shift_mechanic, nama_leader, shift_leader, status, UNIX_TIMESTAMP(timestamp) as timestamp
+      FROM data_perbaikan
+      ORDER BY timestamp DESC
+      `;
+    }
+
+    const values = status !== 'Semua Status' ? [status] : null;
+
+    const [error, rows] = await query(sql, values);
+    if (error) return res.status(500).send(error);
+
+    return res.status(200).send({ data: rows });
+  }
+
   res.status(400).end();
 };
 

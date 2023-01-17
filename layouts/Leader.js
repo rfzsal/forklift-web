@@ -36,9 +36,9 @@ const Leader = ({ children }) => {
     { divider: true },
     { header: 'Perbaikan Forklift' },
     {
-      label: 'Pengajuan Perbaikan',
+      label: 'Status Perbaikan',
       icon: 'fas fa-toolbox',
-      path: '/leader/pengajuan-perbaikan',
+      path: '/leader/status-perbaikan',
     },
     {
       label: 'Riwayat Perbaikan',
