@@ -9,19 +9,22 @@ const handler = async (req, res) => {
   const { id, from, to, status } = req.query;
 
   if (!id && !from && !to && !status) {
-    const sql = `SELECT *
-    ROM data_pengecekan
-    ORDER BY timestamp
+    const sql = `
+    SELECT
+    id, id_forklift, nama_driver, shift_driver, status, UNIX_TIMESTAMP(timestamp) as timestamp
+    FROM data_pengecekan
+    ORDER BY timestamp DESC
     `;
 
     const [error, rows] = await query(sql, null);
-    if (error) return res.status(500).end();
+    if (error) return res.status(500).send(error);
 
     return res.status(200).send({ data: rows });
   }
 
   if (id) {
-    const sql = `SELECT
+    const sql = `
+    SELECT
     data_pengecekan.id,
     data_pengecekan.id_forklift,
     data_pengecekan.nama_driver,
@@ -57,11 +60,13 @@ const handler = async (req, res) => {
   }
 
   if (from && to && status) {
-    const sql = `SELECT *
+    const sql = `
+    SELECT
+    id, id_forklift, nama_driver, shift_driver, status, UNIX_TIMESTAMP(timestampp)
     FROM data_pengecekan 
     WHERE status = ?
     AND timestamp BETWEEN FROM_UNIXTIME(?) AND FROM_UNIXTIME(?)
-    ORDER BY timestamp
+    ORDER BY timestamp DESC
     `;
 
     const values = [status, from, to];

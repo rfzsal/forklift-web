@@ -1,4 +1,4 @@
-import TableDropdown from 'components/Dropdowns/TableDropdown';
+import formatDate from 'utils/formatDate';
 
 const CardHeader = ({ title, actionButton }) => {
   return (
@@ -57,20 +57,20 @@ const TableHead = () => {
             'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
           }
         >
-          Tanggal Pengecekan
+          Waktu Pengecekan
         </th>
-        <th
-          className={
-            'px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ' +
-            'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
-          }
-        ></th>
       </tr>
     </thead>
   );
 };
 
-const TableRow = () => {
+const TableRow = ({
+  idForklift,
+  namaDriver,
+  shiftDriver,
+  status,
+  timestamp,
+}) => {
   return (
     <tr>
       <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
@@ -79,28 +79,71 @@ const TableRow = () => {
           className="h-12 w-12 bg-white rounded-full border"
           alt="..."
         ></img>{' '}
-        <span className="ml-3 font-bold text-blueGray-600">ID A1</span>
+        <span className="ml-3 font-bold text-blueGray-600">
+          ID {idForklift}
+        </span>
       </th>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-        Irfan Hidayat
+        {namaDriver}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
-        Shift Pagi
+        Shift {shiftDriver}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
-        <i className="fas fa-circle text-orange-500 mr-2"></i> Kurang Baik
+        {status === 'Kurang Baik' && (
+          <i className="fas fa-circle text-orange-500 mr-2"></i>
+        )}
+        {status === 'Baik' && (
+          <i className="fas fa-circle text-green-500 mr-2"></i>
+        )}
+
+        {status}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
-        12 Desember 2022
-      </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-        <TableDropdown />
+        {formatDate(timestamp * 1000, 'hh:mm - dd MMMM yyyy')}
       </td>
     </tr>
   );
 };
 
-const CardRiwayat = () => {
+const CardRiwayat = ({ data }) => {
+  const createRows = () => {
+    if (!data)
+      return (
+        <tr>
+          <td
+            colSpan={6}
+            className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+          >
+            Tidak ada data
+          </td>
+        </tr>
+      );
+
+    if (data.length === 0)
+      return (
+        <tr>
+          <td
+            colSpan={6}
+            className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center"
+          >
+            Tidak ada data
+          </td>
+        </tr>
+      );
+
+    return data.map((row, index) => (
+      <TableRow
+        key={row.id + index}
+        idForklift={row.id_forklift}
+        namaDriver={row.nama_driver}
+        shiftDriver={row.shift_driver}
+        status={row.status}
+        timestamp={row.timestamp}
+      />
+    ));
+  };
+
   return (
     <div className="w-full px-4">
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-sm rounded">
@@ -120,13 +163,7 @@ const CardRiwayat = () => {
           <table className="items-center w-full bg-transparent border-collapse">
             <TableHead />
 
-            <tbody>
-              <TableRow />
-              <TableRow />
-              <TableRow />
-              <TableRow />
-              <TableRow />
-            </tbody>
+            <tbody>{createRows()}</tbody>
           </table>
         </div>
       </div>
