@@ -1,25 +1,21 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 import { withSessionSsr } from 'lib/session';
 import CardRiwayat from 'views/shared/CardRiwayatPengecekan';
 import FilterRiwayat from 'views/shared/FilterRiwayatPengecekan';
 import Driver from 'layouts/Driver';
 import coreAPI from 'utils/coreAPI';
+import { usePengecekan } from 'hooks/usePengecekan';
 
 const RiwayatPengecekan = () => {
+  const pengecekan = usePengecekan();
   const [riwayat, setRiwayat] = useState(null);
-  const riwayatRef = useRef(null);
 
   const refresh = async (filter) => {
     const api = new coreAPI();
-
-    const [error, data] = filter
-      ? await api.getRiwayatPengecekan(filter)
-      : await api.getRiwayatPengecekan();
+    const [error, data] = await api.getRiwayatPengecekan(filter);
 
     if (error) return setRiwayat([]);
-
-    if (!filter) riwayatRef.current = data;
     setRiwayat(data);
   };
 
@@ -28,12 +24,12 @@ const RiwayatPengecekan = () => {
   };
 
   const handleResetFilter = () => {
-    setRiwayat(riwayatRef.current);
+    setRiwayat(pengecekan.riwayat);
   };
 
   useEffect(() => {
-    refresh();
-  }, []);
+    setRiwayat(pengecekan.riwayat);
+  }, [pengecekan.riwayat]);
 
   return (
     <div className="flex flex-wrap">
