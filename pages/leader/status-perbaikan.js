@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { withSessionSsr } from 'lib/session';
 import Leader from 'layouts/Leader';
 import CardReview from 'views/leader/CardReview';
-import CardRiwayat from 'views/shared/riwayat-pengecekan/CardRiwayatPerbaikan';
+import CardRiwayat from 'views/shared/CardRiwayatPerbaikan';
 import coreAPI from 'utils/coreAPI';
 
 const StatusPerbaikan = () => {
