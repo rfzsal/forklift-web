@@ -1,6 +1,6 @@
 import { withSessionSsr } from 'lib/session';
 import Driver from 'layouts/Driver';
-import CardPengecekan from 'views/driver/proses-pengecekan/CardPengecekan';
+import CardPengecekan from 'views/driver/CardPengecekan';
 
 const ProsesPengecekan = () => {
   return (

@@ -1,17 +1,13 @@
 import { withSessionSsr } from 'lib/session';
-import CardRiwayat from 'views/leader/riwayat-pengecekan/CardRiwayat';
-import CardKomponen from 'views/beranda/CardKomponen';
+import CardRiwayat from 'views/shared/CardRiwayatPengecekan';
 import Leader from 'layouts/Leader';
 
 const Beranda = () => {
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-full xl:w-8/12 mb-4 xl:mb-0">
+        <div className="w-full">
           <CardRiwayat />
-        </div>
-        <div className="w-full xl:w-4/12">
-          <CardKomponen />
         </div>
       </div>
     </>
