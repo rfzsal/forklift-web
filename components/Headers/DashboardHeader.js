@@ -1,6 +1,9 @@
 import CardStats from 'components/Cards/CardStats.js';
+import { usePengecekan } from 'hooks/usePengecekan';
 
 const DashboardHeader = ({ children }) => {
+  const pengecekan = usePengecekan();
+
   return (
     <>
       <div className="relative bg-blueGray-800 md:pt-32 pb-32 pt-12">
@@ -9,7 +12,7 @@ const DashboardHeader = ({ children }) => {
             <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
               <CardStats
                 statSubtitle="TOTAL PENGECEKAN"
-                statTitle="27"
+                statTitle={pengecekan.riwayat?.length || 0}
                 statIconName="fas fa-search"
                 statIconColor="bg-orange-500"
               />
@@ -17,7 +20,7 @@ const DashboardHeader = ({ children }) => {
             <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
               <CardStats
                 statSubtitle="TOTAL PERBAIKAN"
-                statTitle="19"
+                statTitle={0}
                 statIconName="fas fa-cogs"
                 statIconColor="bg-lightBlue-500"
               />
@@ -25,7 +28,7 @@ const DashboardHeader = ({ children }) => {
             <div className="w-full lg:w-6/12 xl:w-4/12 px-4">
               <CardStats
                 statSubtitle="SUDAH DIPERBAIKI"
-                statTitle="9"
+                statTitle={0}
                 statIconName="fas fa-check"
                 statIconColor="bg-emerald-500"
               />
