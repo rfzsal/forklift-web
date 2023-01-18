@@ -1,4 +1,7 @@
 import formatDate from 'utils/formatDate';
+import { subSeconds } from 'date-fns';
+
+import exportExcell from 'utils/exportExcell';
 
 const CardHeader = ({ title, actionButton }) => {
   return (
@@ -109,6 +112,38 @@ const TableRow = ({
 };
 
 const CardRiwayat = ({ data }) => {
+  const handleExport = () => {
+    if (!data) return;
+
+    const rowsData = [
+      [
+        'ID Forklift',
+        'Nama Mekanik',
+        'Shift Mekanik',
+        'Nama Leader',
+        'Shift Leader',
+        'Status',
+        'Waktu',
+      ],
+    ];
+    data.forEach((row) => {
+      rowsData.push([
+        row.id_forklift,
+        row.nama_mechanic,
+        row.shift_mechanic,
+        row.nama_leader,
+        row.shift_leader,
+        row.status,
+        subSeconds(row.timestamp * 1000, 12),
+      ]);
+    });
+
+    const [error] = exportExcell(rowsData, 'riwayat_perbaikan.xlsx');
+
+    if (error) return alert('Export data gagal');
+    alert('Export data berhasil');
+  };
+
   const createRows = () => {
     if (!data)
       return (
@@ -157,6 +192,7 @@ const CardRiwayat = ({ data }) => {
             <button
               className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-semibold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
+              onClick={handleExport}
             >
               Export
             </button>
