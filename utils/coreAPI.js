@@ -29,6 +29,16 @@ class coreAPI {
     }
   }
 
+  async getRiwayatPengecekanByID(id) {
+    try {
+      const res = await axios.get(`/api/pengecekan?id=${id}`);
+
+      return [null, res.data.data];
+    } catch (error) {
+      return [error, null];
+    }
+  }
+
   async getRiwayatPerbaikan(filter) {
     try {
       if (filter) {

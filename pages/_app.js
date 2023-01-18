@@ -8,13 +8,13 @@ import PageChange from 'components/PageChange/PageChange.js';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'styles/tailwind.css';
+import 'react-modern-drawer/dist/index.css';
 
 import { ProvideAuth } from 'hooks/useAuth';
 import { ProvidePengecekan } from 'hooks/usePengecekan';
 import { ProvidePerbaikan } from 'hooks/usePerbaikan';
 
 Router.events.on('routeChangeStart', (url) => {
-  console.log(`Loading: ${url}`);
   document.body.classList.add('body-page-transition');
   ReactDOM.render(
     <PageChange path={url} />,
