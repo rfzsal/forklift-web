@@ -10,6 +10,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'styles/tailwind.css';
 
 import { ProvideAuth } from 'hooks/useAuth';
+import { ProvidePengecekan } from 'hooks/usePengecekan';
 
 Router.events.on('routeChangeStart', (url) => {
   console.log(`Loading: ${url}`);
@@ -76,9 +77,11 @@ export default class MyApp extends App {
         </Head>
 
         <ProvideAuth>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <ProvidePengecekan>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </ProvidePengecekan>
         </ProvideAuth>
       </React.Fragment>
     );

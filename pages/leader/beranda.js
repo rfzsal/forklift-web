@@ -1,13 +1,16 @@
 import { withSessionSsr } from 'lib/session';
 import CardRiwayat from 'views/shared/CardRiwayatPengecekan';
 import Leader from 'layouts/Leader';
+import { usePengecekan } from 'hooks/usePengecekan';
 
 const Beranda = () => {
+  const pengecekan = usePengecekan();
+
   return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full">
-          <CardRiwayat />
+          <CardRiwayat data={pengecekan.riwayat?.slice(0, 5)} />
         </div>
       </div>
     </>
