@@ -20,10 +20,9 @@ const useProvideAuth = () => {
     try {
       const res = await axios.get('/api/auth');
 
-      if (!res.data.user) {
-        setUser(null);
-      }
+      if (!res.data.user) setUser(null);
     } catch (error) {
+      setUser(null);
       return [error, null];
     }
   };
@@ -35,6 +34,7 @@ const useProvideAuth = () => {
 
       return [null, res.data.user];
     } catch (error) {
+      setUser(null);
       return [error, null];
     }
   };
@@ -46,6 +46,7 @@ const useProvideAuth = () => {
 
       return [null, true];
     } catch (error) {
+      setUser(null);
       return [error, null];
     }
   };
@@ -55,7 +56,7 @@ const useProvideAuth = () => {
 
     const loop = setInterval(() => {
       refresh();
-    }, 1 * 1000);
+    }, 60 * 1000);
 
     return () => clearInterval(loop);
   }, [user]);
