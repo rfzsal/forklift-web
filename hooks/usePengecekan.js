@@ -43,7 +43,7 @@ const useProvidePengecekan = () => {
     return () => clearInterval(loop);
   }, []);
 
-  return { riwayat };
+  return { riwayat, refresh };
 };
 
 export { ProvidePengecekan, usePengecekan };
