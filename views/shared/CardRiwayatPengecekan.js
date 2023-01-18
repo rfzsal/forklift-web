@@ -109,7 +109,7 @@ const TableRow = ({
   );
 };
 
-const CardRiwayat = ({ data }) => {
+const CardRiwayat = ({ data, hideActionButton }) => {
   const handleExport = () => {
     if (!data) return;
 
@@ -175,13 +175,15 @@ const CardRiwayat = ({ data }) => {
         <CardHeader
           title="Riwayat Pengecekan"
           actionButton={
-            <button
-              className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-semibold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-              type="button"
-              onClick={handleExport}
-            >
-              Export
-            </button>
+            !hideActionButton && (
+              <button
+                className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-semibold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                type="button"
+                onClick={handleExport}
+              >
+                Export
+              </button>
+            )
           }
         />
 

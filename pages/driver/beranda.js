@@ -10,7 +10,10 @@ const Beranda = () => {
     <>
       <div className="flex flex-wrap">
         <div className="w-full">
-          <CardRiwayat data={pengecekan.riwayat?.slice(0, 5)} />
+          <CardRiwayat
+            hideActionButton
+            data={pengecekan.riwayat?.slice(0, 5)}
+          />
         </div>
       </div>
     </>
