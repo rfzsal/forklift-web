@@ -11,6 +11,7 @@ import 'styles/tailwind.css';
 
 import { ProvideAuth } from 'hooks/useAuth';
 import { ProvidePengecekan } from 'hooks/usePengecekan';
+import { ProvidePerbaikan } from 'hooks/usePerbaikan';
 
 Router.events.on('routeChangeStart', (url) => {
   console.log(`Loading: ${url}`);
@@ -78,9 +79,11 @@ export default class MyApp extends App {
 
         <ProvideAuth>
           <ProvidePengecekan>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
+            <ProvidePerbaikan>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </ProvidePerbaikan>
           </ProvidePengecekan>
         </ProvideAuth>
       </React.Fragment>
