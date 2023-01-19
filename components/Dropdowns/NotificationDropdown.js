@@ -22,7 +22,7 @@ const NotificationDropdown = ({ notification }) => {
     if (!notification) return 'text-blueGray-500';
     if (notification.length === 0) return 'text-blueGray-500';
 
-    return 'text-white';
+    return 'text-red-500';
   };
 
   const createNotification = () => {

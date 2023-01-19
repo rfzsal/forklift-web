@@ -79,7 +79,11 @@ const Mechanic = ({ children }) => {
 
   return (
     <>
-      <Sidebar routes={sidebarRoutes} role="mechanic" />
+      <Sidebar
+        routes={sidebarRoutes}
+        role="mechanic"
+        notification={filterRiwayat().belumDiperbaiki}
+      />
       <div className="relative md:ml-64 bg-blueGray-100 min-h-screen">
         <DashboardNavbar
           routes={routesHistory}

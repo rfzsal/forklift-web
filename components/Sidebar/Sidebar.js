@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import NotificationDropdown from 'components/Dropdowns/NotificationDropdown.js';
 import UserDropdown from 'components/Dropdowns/UserDropdown.js';
 
-const Sidebar = ({ routes, role }) => {
+const Sidebar = ({ routes, role, notification }) => {
   const [collapseShow, setCollapseShow] = useState('hidden');
   const router = useRouter();
 
@@ -31,9 +31,11 @@ const Sidebar = ({ routes, role }) => {
           </Link>
 
           <ul className="md:hidden items-center flex flex-wrap list-none">
-            <li className="inline-block relative mr-4">
-              <NotificationDropdown />
-            </li>
+            {role === 'mechanic' && (
+              <li className="inline-block relative mr-4">
+                <NotificationDropdown notification={notification} />
+              </li>
+            )}
             <li className="inline-block relative">
               <UserDropdown avatarSeed={role} />
             </li>
