@@ -41,7 +41,7 @@ const useProvideAuth = () => {
 
   const logout = async () => {
     try {
-      await axios.get('/api/auth/logout');
+      await axios.post('/api/auth/logout');
       setUser(null);
 
       return [null, true];
