@@ -3,10 +3,11 @@ const { hash } = require('bcrypt');
 const { query } = require('lib/server/mysql');
 
 const handler = async (req, res) => {
-  const id = '111111';
-  const username = 'bengkelgajahtunggal';
-  const password = await hash('24januari', 10);
-  const role = 'mechanic';
+  const { username, role } = req.query;
+  if (!username || !role) return res.status(400).end();
+
+  const id = `${Math.floor(100000 + Math.random() * 900000)}`;
+  const password = await hash('24agustus', 10);
 
   const sql = 'INSERT INTO data_pengguna VALUES (?, ?, ?, ?)';
   const values = [id, username, password, role];
