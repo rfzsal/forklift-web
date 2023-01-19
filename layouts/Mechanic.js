@@ -5,10 +5,33 @@ import Sidebar from 'components/Sidebar/Sidebar.js';
 import DashboardHeader from 'components/Headers/DashboardHeader';
 
 import { ProvidePengecekan } from 'hooks/usePengecekan';
-import { ProvidePerbaikan } from 'hooks/usePerbaikan';
+import { ProvidePerbaikan, usePerbaikan } from 'hooks/usePerbaikan';
+
+const withRiwayat = (Children) => {
+  return (props) => {
+    return (
+      <ProvidePengecekan>
+        <ProvidePerbaikan>
+          <Children {...props} />
+        </ProvidePerbaikan>
+      </ProvidePengecekan>
+    );
+  };
+};
 
 const Mechanic = ({ children }) => {
   const router = useRouter();
+  const perbaikan = usePerbaikan();
+
+  const filterRiwayat = () => {
+    if (!perbaikan.riwayat) return { belumDiperbaiki: [] };
+
+    const belumDiperbaiki = perbaikan.riwayat.filter(
+      (row) => row.status === 'Belum Diperbaiki'
+    );
+
+    return { belumDiperbaiki };
+  };
 
   const fullRoutes = router.pathname.split('/');
   fullRoutes.shift();
@@ -55,18 +78,20 @@ const Mechanic = ({ children }) => {
   ];
 
   return (
-    <ProvidePengecekan>
-      <ProvidePerbaikan>
-        <Sidebar routes={sidebarRoutes} role="driver" />
-        <div className="relative md:ml-64 bg-blueGray-100 min-h-screen">
-          <DashboardNavbar routes={routesHistory} role="driver" />
+    <>
+      <Sidebar routes={sidebarRoutes} role="driver" />
+      <div className="relative md:ml-64 bg-blueGray-100 min-h-screen">
+        <DashboardNavbar
+          routes={routesHistory}
+          role="driver"
+          notification={filterRiwayat().belumDiperbaiki}
+        />
 
-          <DashboardHeader />
-          <div className="px-4 md:px-10 mx-auto w-full -mt-32">{children}</div>
-        </div>
-      </ProvidePerbaikan>
-    </ProvidePengecekan>
+        <DashboardHeader />
+        <div className="px-4 md:px-10 mx-auto w-full -mt-32">{children}</div>
+      </div>
+    </>
   );
 };
 
-export default Mechanic;
+export default withRiwayat(Mechanic);
