@@ -1,15 +1,13 @@
-import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 import DashboardNavbar from 'components/Navbars/DashboardNavbar';
 import Sidebar from 'components/Sidebar/Sidebar.js';
 import DashboardHeader from 'components/Headers/DashboardHeader';
-import { useAuth } from 'hooks/useAuth';
+
 import { ProvidePengecekan } from 'hooks/usePengecekan';
 import { ProvidePerbaikan } from 'hooks/usePerbaikan';
 
 const Mechanic = ({ children }) => {
-  const { user, refresh } = useAuth();
   const router = useRouter();
 
   const fullRoutes = router.pathname.split('/');
@@ -55,13 +53,6 @@ const Mechanic = ({ children }) => {
       path: '/auth/keluar',
     },
   ];
-
-  useEffect(() => {
-    if (!user) {
-      refresh();
-      return null;
-    }
-  }, [user, refresh]);
 
   return (
     <ProvidePengecekan>

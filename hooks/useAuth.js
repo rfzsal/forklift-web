@@ -1,10 +1,15 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import axios from 'axios';
+import router from 'next/router';
 
 const AuthContext = createContext(null);
 
 const ProvideAuth = ({ children }) => {
   const authProvider = useProvideAuth();
+
+  useEffect(() => {
+    if (!authProvider.user) return router.replace('/auth/masuk');
+  }, [authProvider.user]);
 
   return (
     <AuthContext.Provider value={authProvider}>{children}</AuthContext.Provider>
@@ -55,6 +60,10 @@ const useProvideAuth = () => {
   useEffect(() => {
     refresh();
   }, []);
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   useEffect(() => {
     if (!user) return;

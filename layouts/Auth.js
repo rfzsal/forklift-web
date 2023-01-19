@@ -1,16 +1,4 @@
-import { useAuth } from 'hooks/useAuth';
-import { useEffect } from 'react';
-
 const Auth = ({ children }) => {
-  const { user, refresh } = useAuth();
-
-  useEffect(() => {
-    if (!user) {
-      refresh();
-      return null;
-    }
-  }, [user, refresh]);
-
   return (
     <>
       <main>
