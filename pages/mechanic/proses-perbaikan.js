@@ -2,37 +2,30 @@ import { useState, useEffect } from 'react';
 import { withSessionSsr } from 'lib/session';
 import Mechanic from 'layouts/Mechanic';
 import CardReview from 'views/mechanic/CardReview';
-import coreAPI from 'utils/coreAPI';
+
+import { usePerbaikan } from 'hooks/usePerbaikan';
 
 const ProsesPerbaikan = () => {
+  const perbaikan = usePerbaikan();
   const [riwayat, setRiwayat] = useState(null);
 
-  const refresh = async (filter) => {
-    const api = new coreAPI();
-
-    const [error, data] = filter
-      ? await api.getRiwayatPerbaikan(filter)
-      : await api.getRiwayatPerbaikan();
-
-    if (error) return setRiwayat([]);
-    setRiwayat(data);
-  };
-
   useEffect(() => {
-    refresh();
-  }, []);
+    setRiwayat(perbaikan.riwayat);
+  }, [perbaikan.riwayat]);
 
   const filterRiwayat = () => {
     if (!riwayat) return [];
 
-    const onGoing = riwayat.filter((row) => row.status === 'Belum Diperbaiki');
+    const belumDiperbaiki = riwayat.filter(
+      (row) => row.status === 'Belum Diperbaiki'
+    );
 
-    return { onGoing };
+    return { belumDiperbaiki };
   };
 
   return (
     <div className="flex flex-wrap">
-      <CardReview data={filterRiwayat().onGoing} />
+      <CardReview data={filterRiwayat().belumDiperbaiki} />
     </div>
   );
 };

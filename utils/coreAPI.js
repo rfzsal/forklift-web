@@ -56,6 +56,19 @@ class coreAPI {
       return [error, null];
     }
   }
+
+  async updateStatusPerbaikan(id, data) {
+    try {
+      const res = await axios.post(
+        `/api/perbaikan/update-status?id=${id}`,
+        data
+      );
+
+      return [null, res.data.data];
+    } catch (error) {
+      return [error, null];
+    }
+  }
 }
 
 export default coreAPI;
