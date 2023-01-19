@@ -96,6 +96,7 @@ const Sidebar = ({ routes, role }) => {
                   <li key={route.label + index} className="items-center">
                     <Link href={route.path}>
                       <a
+                        onClick={() => setCollapseShow('hidden')}
                         href={route.path}
                         className={
                           'text-xs uppercase py-3 font-bold block ' +
