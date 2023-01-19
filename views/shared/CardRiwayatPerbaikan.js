@@ -242,7 +242,10 @@ const TableRow = ({
   return (
     <tr>
       <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-        <button onClick={() => onClick(index)} className="flex items-center">
+        <button
+          onClick={() => onClick(index)}
+          className="flex items-center focus:outline-none outline-none"
+        >
           <img
             src="/img/forklift.png"
             className="h-12 w-12 bg-white rounded-full border"
