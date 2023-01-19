@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import coreAPI from 'utils/coreAPI';
@@ -95,6 +96,8 @@ const StatusCheck = ({
 };
 
 const CardPengecekan = () => {
+  const router = useRouter();
+
   const [values, setValues] = useState({
     namaDriver: '',
     shiftDriver: 'Pagi',
@@ -196,6 +199,7 @@ const CardPengecekan = () => {
           title="Proses Pengecekan"
           actionButton={
             <button
+              onClick={() => router.push('/driver/riwayat-pengecekan')}
               className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-semibold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
               type="button"
             >
