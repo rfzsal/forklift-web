@@ -11,8 +11,6 @@ import 'styles/tailwind.css';
 import 'react-modern-drawer/dist/index.css';
 
 import { ProvideAuth } from 'hooks/useAuth';
-import { ProvidePengecekan } from 'hooks/usePengecekan';
-import { ProvidePerbaikan } from 'hooks/usePerbaikan';
 
 Router.events.on('routeChangeStart', (url) => {
   document.body.classList.add('body-page-transition');
@@ -74,17 +72,13 @@ export default class MyApp extends App {
             name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
-          <title>Cek Forklift - Gajah Tunggal</title>
+          <title>Forklift - Gajah Tunggal</title>
         </Head>
 
         <ProvideAuth>
-          <ProvidePengecekan>
-            <ProvidePerbaikan>
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </ProvidePerbaikan>
-          </ProvidePengecekan>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ProvideAuth>
       </React.Fragment>
     );

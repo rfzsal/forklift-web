@@ -5,6 +5,8 @@ import DashboardNavbar from 'components/Navbars/DashboardNavbar';
 import Sidebar from 'components/Sidebar/Sidebar.js';
 import DashboardHeader from 'components/Headers/DashboardHeader';
 import { useAuth } from 'hooks/useAuth';
+import { ProvidePengecekan } from 'hooks/usePengecekan';
+import { ProvidePerbaikan } from 'hooks/usePerbaikan';
 
 const Mechanic = ({ children }) => {
   const { user, refresh } = useAuth();
@@ -62,15 +64,17 @@ const Mechanic = ({ children }) => {
   }, [user, refresh]);
 
   return (
-    <>
-      <Sidebar routes={sidebarRoutes} role="driver" />
-      <div className="relative md:ml-64 bg-blueGray-100 min-h-screen">
-        <DashboardNavbar routes={routesHistory} role="driver" />
+    <ProvidePengecekan>
+      <ProvidePerbaikan>
+        <Sidebar routes={sidebarRoutes} role="driver" />
+        <div className="relative md:ml-64 bg-blueGray-100 min-h-screen">
+          <DashboardNavbar routes={routesHistory} role="driver" />
 
-        <DashboardHeader />
-        <div className="px-4 md:px-10 mx-auto w-full -mt-32">{children}</div>
-      </div>
-    </>
+          <DashboardHeader />
+          <div className="px-4 md:px-10 mx-auto w-full -mt-32">{children}</div>
+        </div>
+      </ProvidePerbaikan>
+    </ProvidePengecekan>
   );
 };
 
