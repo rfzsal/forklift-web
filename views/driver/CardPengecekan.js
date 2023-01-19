@@ -2,6 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import coreAPI from 'utils/coreAPI';
+import { usePengecekan } from 'hooks/usePengecekan';
+import { usePerbaikan } from 'hooks/usePerbaikan';
 
 const CardHeader = ({ title, actionButton }) => {
   return (
@@ -97,6 +99,8 @@ const StatusCheck = ({
 
 const CardPengecekan = () => {
   const router = useRouter();
+  const pengecekan = usePengecekan();
+  const perbaikan = usePerbaikan();
 
   const [values, setValues] = useState({
     namaDriver: '',
@@ -154,6 +158,9 @@ const CardPengecekan = () => {
 
     if (error) return alert('Pengecekan gagal');
     alert('Pengecekan berhasil');
+
+    pengecekan.refresh();
+    perbaikan.refresh();
 
     setResetStatus(true);
     setResetStatus(false);
