@@ -79,11 +79,11 @@ const Mechanic = ({ children }) => {
 
   return (
     <>
-      <Sidebar routes={sidebarRoutes} role="driver" />
+      <Sidebar routes={sidebarRoutes} role="mechanic" />
       <div className="relative md:ml-64 bg-blueGray-100 min-h-screen">
         <DashboardNavbar
           routes={routesHistory}
-          role="driver"
+          role="mechanic"
           notification={filterRiwayat().belumDiperbaiki}
         />
 

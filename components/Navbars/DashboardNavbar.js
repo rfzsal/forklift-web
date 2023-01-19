@@ -26,9 +26,11 @@ const DashboardNavbar = ({ routes, role, notification }) => {
           </span>
 
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-            <li className="mr-4">
-              <NotificationDropdown notification={notification} />
-            </li>
+            {role === 'mechanic' && (
+              <li className="mr-4">
+                <NotificationDropdown notification={notification} />
+              </li>
+            )}
             <li>
               <UserDropdown avatarSeed={role} />
             </li>
