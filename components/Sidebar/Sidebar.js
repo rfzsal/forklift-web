@@ -26,7 +26,7 @@ const Sidebar = ({ routes, role }) => {
               href="/"
               className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
             >
-              Notus NextJS
+              Forklift Gajah Tunggal
             </a>
           </Link>
 
@@ -53,7 +53,7 @@ const Sidebar = ({ routes, role }) => {
                       href="/"
                       className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
                     >
-                      Notus NextJS
+                      Forklift Gajah Tunggal
                     </a>
                   </Link>
                 </div>
