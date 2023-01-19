@@ -52,6 +52,10 @@ const useProvideAuth = () => {
   };
 
   useEffect(() => {
+    refresh();
+  }, []);
+
+  useEffect(() => {
     if (!user) return;
 
     const loop = setInterval(() => {
