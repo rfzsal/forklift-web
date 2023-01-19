@@ -21,6 +21,7 @@ const useProvideAuth = () => {
       const res = await axios.get('/api/auth');
 
       if (!res.data.user) setUser(null);
+      setUser(res.data.user);
     } catch (error) {
       setUser(null);
       return [error, null];
