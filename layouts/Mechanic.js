@@ -47,7 +47,7 @@ const Mechanic = ({ children }) => {
 
   const sidebarRoutes = [
     { divider: true },
-    { header: 'Dashboard Mechanic' },
+    { header: 'Dashboard Admin Bengkel' },
     { label: 'Beranda', icon: 'fas fa-home', path: '/mechanic/beranda' },
     { divider: true },
     { header: 'Pengecekan Forklift' },
