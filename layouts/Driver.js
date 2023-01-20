@@ -24,7 +24,7 @@ const Driver = ({ children }) => {
 
   const sidebarRoutes = [
     { divider: true },
-    { header: 'Dashboard Driver' },
+    { header: 'Dashboard Operator Forklift' },
     { label: 'Beranda', icon: 'fas fa-home', path: '/driver/beranda' },
     { divider: true },
     { header: 'Pengecekan Forklift' },
