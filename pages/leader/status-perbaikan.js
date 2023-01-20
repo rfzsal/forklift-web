@@ -10,23 +10,22 @@ const StatusPerbaikan = () => {
   const [riwayat, setRiwayat] = useState(null);
 
   useEffect(() => {
-    setRiwayat([perbaikan.riwayat]);
+    setRiwayat(perbaikan.riwayat);
   }, [perbaikan.riwayat]);
 
   const filterRiwayat = () => {
-    if (!riwayat) return { sudahDiperbaiki: [] };
-    if (riwayat.length === 0) return { sudahDiperbaiki: [] };
+    if (!riwayat) return [];
 
     const sudahDiperbaiki = riwayat.filter(
       (row) => row.status === 'Sudah Diperbaiki'
     );
 
-    return { sudahDiperbaiki };
+    return sudahDiperbaiki;
   };
 
   return (
     <div className="flex flex-wrap">
-      <CardReview data={filterRiwayat().sudahDiperbaiki} />
+      <CardReview data={filterRiwayat()} />
     </div>
   );
 };

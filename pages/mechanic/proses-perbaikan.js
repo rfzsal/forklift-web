@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
+
 import { withSessionSsr } from 'lib/session';
 import Mechanic from 'layouts/Mechanic';
 import CardReview from 'views/mechanic/CardReview';
-
 import { usePerbaikan } from 'hooks/usePerbaikan';
 
 const ProsesPerbaikan = () => {
@@ -20,12 +20,12 @@ const ProsesPerbaikan = () => {
       (row) => row.status === 'Belum Diperbaiki'
     );
 
-    return { belumDiperbaiki };
+    return belumDiperbaiki;
   };
 
   return (
     <div className="flex flex-wrap">
-      <CardReview data={filterRiwayat().belumDiperbaiki} />
+      <CardReview data={filterRiwayat()} />
     </div>
   );
 };
