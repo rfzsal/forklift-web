@@ -76,14 +76,14 @@ const handler = async (req, res) => {
     namaDriver,
     shiftDriver,
     status,
-    format(currentTimestamp, 'yyyy-MM-dd hh:mm:ss'),
+    format(currentTimestamp, 'yyyy-MM-dd HH:mm:ss'),
   ];
 
   const sql2 = `INSERT INTO data_perbaikan VALUES(?, ?, NULL, NULL, NULL, NULL, 'Belum Diperbaiki', ?)`;
   const values2 = [
     id,
     idForklift,
-    format(currentTimestamp, 'yyyy-MM-dd hh:mm:ss'),
+    format(currentTimestamp, 'yyyy-MM-dd HH:mm:ss'),
   ];
 
   const sql3 =

@@ -34,7 +34,7 @@ const handler = async (req, res) => {
 
   sql += 'WHERE id=?';
 
-  const values = [status, format(currentTimestamp, 'yyyy-MM-dd hh:mm:ss')];
+  const values = [status, format(currentTimestamp, 'yyyy-MM-dd HH:mm:ss')];
 
   if (mechanic) {
     values.push(mechanic.name);

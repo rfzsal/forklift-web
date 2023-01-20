@@ -273,7 +273,7 @@ const TableRow = ({
         {status}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
-        {formatDate(timestamp * 1000, 'hh:mm - dd MMMM yyyy')}
+        {formatDate(timestamp * 1000, 'HH:mm - dd MMMM yyyy')}
       </td>
     </tr>
   );
