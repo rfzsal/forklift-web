@@ -1,41 +1,32 @@
 import { useState, useEffect } from 'react';
+
 import { withSessionSsr } from 'lib/session';
 import Leader from 'layouts/Leader';
 import CardReview from 'views/leader/CardReview';
-import CardRiwayat from 'views/shared/CardRiwayatPerbaikan';
-import coreAPI from 'utils/coreAPI';
+import { usePerbaikan } from 'hooks/usePerbaikan';
 
 const StatusPerbaikan = () => {
+  const perbaikan = usePerbaikan();
   const [riwayat, setRiwayat] = useState(null);
 
-  const refresh = async (filter) => {
-    const api = new coreAPI();
-
-    const [error, data] = filter
-      ? await api.getRiwayatPerbaikan(filter)
-      : await api.getRiwayatPerbaikan();
-
-    if (error) return setRiwayat([]);
-    setRiwayat(data);
-  };
-
   useEffect(() => {
-    refresh();
-  }, []);
+    setRiwayat([perbaikan.riwayat]);
+  }, [perbaikan.riwayat]);
 
   const filterRiwayat = () => {
-    if (!riwayat) return [];
+    if (!riwayat) return { sudahDiperbaiki: [] };
+    if (riwayat.length === 0) return { sudahDiperbaiki: [] };
 
-    const done = riwayat.filter((row) => row.status === 'Sudah Diperbaiki');
-    const onGoing = riwayat.filter((row) => row.status === 'Belum Diperbaiki');
+    const sudahDiperbaiki = riwayat.filter(
+      (row) => row.status === 'Sudah Diperbaiki'
+    );
 
-    return { done, onGoing };
+    return { sudahDiperbaiki };
   };
 
   return (
     <div className="flex flex-wrap">
-      <CardReview data={filterRiwayat().done} />
-      <CardRiwayat data={filterRiwayat().onGoing} />
+      <CardReview data={filterRiwayat().sudahDiperbaiki} />
     </div>
   );
 };

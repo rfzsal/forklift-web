@@ -3,6 +3,8 @@ import formatDate from 'utils/formatDate';
 import Drawer from 'react-modern-drawer';
 
 import coreAPI from 'utils/coreAPI';
+import { usePerbaikan } from 'hooks/usePerbaikan';
+import FormModal from 'views/shared/FormModal';
 
 const StatusInfo = ({ labelStatus, labelDetails, details }) => {
   if (!details) return null;
@@ -242,7 +244,13 @@ const TableRow = ({
   status,
   timestamp,
   onClick,
+  onActionClick,
+  loading,
 }) => {
+  const handleSubmit = (values) => {
+    onActionClick(values);
+  };
+
   return (
     <tr>
       <th className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
@@ -280,21 +288,23 @@ const TableRow = ({
         {formatDate(timestamp * 1000, 'hh:mm - dd MMMM yyyy')}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
-        <button
-          className="border text-xs font-semibold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-          type="button"
-        >
-          Siap Digunakan
-        </button>
+        <FormModal
+          label="Siap Digunakan"
+          onSubmit={handleSubmit}
+          loading={loading}
+        />
       </td>
     </tr>
   );
 };
 
 const CardReview = ({ data, disableButton }) => {
+  const perbaikan = usePerbaikan();
   const [initDrawer, setInitDrawer] = useState(false);
   const [drawerState, setDrawerState] = useState(false);
   const [drawerData, setDrawerData] = useState(null);
+
+  const [loading, setLoading] = useState(false);
 
   const toggleDrawer = () => {
     if (drawerData) setDrawerData(null);
@@ -304,6 +314,26 @@ const CardReview = ({ data, disableButton }) => {
   const handleRowClick = (index) => {
     setDrawerData(data[index]);
     toggleDrawer();
+  };
+
+  const handleActionClick = (id) => async (values) => {
+    if (!values) return;
+    if (!values.name || !values.shift) return;
+
+    setLoading(true);
+
+    const util = new coreAPI();
+    const [error] = await util.updateStatusPerbaikan(id, {
+      leader: { name: values.name, shift: values.shift },
+      status: 'Sudah Diperbaiki',
+    });
+
+    setLoading(false);
+
+    perbaikan.refresh();
+
+    if (error) return alert('Update status gagal');
+    alert('Update status berhasil');
   };
 
   const createRows = () => {
@@ -343,6 +373,8 @@ const CardReview = ({ data, disableButton }) => {
         status={row.status}
         timestamp={row.timestamp}
         onClick={() => handleRowClick(index)}
+        onActionClick={handleActionClick(row.id)}
+        loading={loading}
       />
     ));
   };
