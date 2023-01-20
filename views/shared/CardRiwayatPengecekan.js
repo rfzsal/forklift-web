@@ -265,7 +265,7 @@ const TableRow = ({
           <i className="fas fa-circle text-orange-500 mr-2"></i>
         )}
         {status === 'Baik' && (
-          <i className="fas fa-circle text-green-500 mr-2"></i>
+          <i className="fas fa-circle text-emerald-500 mr-2"></i>
         )}
 
         {status}
