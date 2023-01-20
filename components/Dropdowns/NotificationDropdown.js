@@ -27,7 +27,8 @@ const NotificationDropdown = ({ notification }) => {
 
   const createNotification = () => {
     if (!notification) return null;
-    if (notification.length === 0) return <p>Tidak ada notifikasi</p>;
+    if (notification.length === 0)
+      return <p className="text-center opacity-75">Tidak ada notifikasi</p>;
 
     return notification.map((row, index) => {
       return (
