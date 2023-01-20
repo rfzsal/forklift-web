@@ -17,7 +17,7 @@ const StatusPerbaikan = () => {
     if (!riwayat) return [];
 
     const sudahDiperbaiki = riwayat.filter(
-      (row) => row.status === 'Sudah Diperbaiki'
+      (row) => row.status === 'Sudah Diperbaiki' && !row.nama_admin
     );
 
     return sudahDiperbaiki;

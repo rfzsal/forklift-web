@@ -325,7 +325,7 @@ const CardReview = ({ data, disableButton }) => {
     const util = new coreAPI();
     const [error] = await util.updateStatusPerbaikan(id, {
       leader: { name: values.name, shift: values.shift },
-      status: 'Siap Digunakan',
+      status: 'Sudah Diperbaiki',
     });
 
     setLoading(false);
