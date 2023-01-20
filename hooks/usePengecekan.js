@@ -38,7 +38,7 @@ const useProvidePengecekan = () => {
   useEffect(() => {
     const loop = setInterval(() => {
       refresh();
-    }, 60 * 1000);
+    }, 15 * 1000);
 
     return () => clearInterval(loop);
   }, []);
