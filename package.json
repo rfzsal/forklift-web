@@ -14,15 +14,17 @@
     "gulp": "4.0.2",
     "gulp-append-prepend": "1.0.8",
     "iron-session": "^6.3.1",
-    "mysql2": "^2.3.3",
+    "mysql2": "^3.0.1",
     "next": "10.0.9",
+    "package.json": "^2.0.1",
     "prettier": "^2.8.2",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-modern-drawer": "^1.2.0",
     "react-scripts": "4.0.3",
     "tailwindcss": "2.0.4",
-    "xlsx": "^0.18.5"
+    "xlsx": "^0.18.5",
+    "yarn.lock": "^0.0.1-security"
   },
   "scripts": {
     "start": "next start",
