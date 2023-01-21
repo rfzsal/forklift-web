@@ -30,7 +30,7 @@ const handler = async (req, res) => {
     data_pengecekan.nama_driver,
     data_pengecekan.shift_driver,
     data_pengecekan.status,
-    data_pengecekan.timestamp,
+    UNIX_TIMESTAMP(timestamp) as timestamp,
     detail_pengecekan.ban AS keterangan_ban,
     detail_pengecekan.fork AS keterangan_fork,
     detail_pengecekan.seat_belt AS keterangan_seat_belt,

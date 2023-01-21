@@ -8,6 +8,7 @@ const ProvideAuth = ({ children }) => {
   const authProvider = useProvideAuth();
 
   useEffect(() => {
+    if (router.pathname.includes('print')) return;
     if (!authProvider.user) return router.replace('/auth/masuk');
   }, [authProvider.user]);
 

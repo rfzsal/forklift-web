@@ -4241,3 +4241,13 @@ select {
 .animate-ping {
   animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
+
+.w-4\/12 {
+  width: 33.333333%;
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+}

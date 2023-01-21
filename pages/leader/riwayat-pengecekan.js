@@ -38,7 +38,7 @@ const RiwayatPengecekan = () => {
         onResetFilter={handleResetFilter}
       />
 
-      <CardRiwayat data={riwayat} />
+      <CardRiwayat data={riwayat} withPrintAction />
     </div>
   );
 };

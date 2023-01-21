@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import formatDate from 'utils/formatDate';
 import { subSeconds } from 'date-fns';
 import Drawer from 'react-modern-drawer';
+import Link from 'next/link';
 
 import exportExcell from 'utils/exportExcell';
 import coreAPI from 'utils/coreAPI';
@@ -179,7 +180,7 @@ const CardHeader = ({ title, actionButton }) => {
   );
 };
 
-const TableHead = () => {
+const TableHead = ({ withPrintAction }) => {
   return (
     <thead>
       <tr>
@@ -223,6 +224,16 @@ const TableHead = () => {
         >
           Waktu Pengecekan
         </th>
+        {withPrintAction && (
+          <th
+            className={
+              'px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center ' +
+              'bg-blueGray-50 text-blueGray-500 border-blueGray-100'
+            }
+          >
+            Aksi
+          </th>
+        )}
       </tr>
     </thead>
   );
@@ -230,12 +241,14 @@ const TableHead = () => {
 
 const TableRow = ({
   index,
+  id,
   idForklift,
   namaDriver,
   shiftDriver,
   status,
   timestamp,
   onClick,
+  withPrintAction,
 }) => {
   return (
     <tr>
@@ -273,11 +286,28 @@ const TableRow = ({
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
         {formatDate(timestamp * 1000, 'HH:mm - dd MMMM yyyy')}
       </td>
+      {withPrintAction && (
+        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-center">
+          <Link
+            href={`/print/riwayat-perbaikan?id=${id}`}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <a
+              href={`/print/riwayat-perbaikan?id=${id}`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <i className="fas fa-print"></i>
+            </a>
+          </Link>
+        </td>
+      )}
     </tr>
   );
 };
 
-const CardRiwayat = ({ data, hideActionButton }) => {
+const CardRiwayat = ({ data, hideActionButton, withPrintAction }) => {
   const [initDrawer, setInitDrawer] = useState(false);
   const [drawerState, setDrawerState] = useState(false);
   const [drawerData, setDrawerData] = useState(null);
@@ -314,7 +344,7 @@ const CardRiwayat = ({ data, hideActionButton }) => {
     alert('Export data berhasil');
   };
 
-  const createRows = () => {
+  const createRows = (withPrintAction = false) => {
     if (!data)
       return (
         <tr>
@@ -343,12 +373,14 @@ const CardRiwayat = ({ data, hideActionButton }) => {
       <TableRow
         key={row.id + index}
         index={index}
+        id={row.id}
         idForklift={row.id_forklift}
         namaDriver={row.nama_driver}
         shiftDriver={row.shift_driver}
         status={row.status}
         timestamp={row.timestamp}
         onClick={handleRowClick}
+        withPrintAction={withPrintAction}
       />
     ));
   };
@@ -378,9 +410,9 @@ const CardRiwayat = ({ data, hideActionButton }) => {
 
           <div className="block w-full overflow-x-auto">
             <table className="items-center w-full bg-transparent border-collapse">
-              <TableHead />
+              <TableHead withPrintAction={withPrintAction} />
 
-              <tbody>{createRows()}</tbody>
+              <tbody>{createRows(withPrintAction)}</tbody>
             </table>
           </div>
         </div>
