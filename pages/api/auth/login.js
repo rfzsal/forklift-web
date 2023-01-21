@@ -16,7 +16,9 @@ const handler = async (req, res) => {
   if (error) return res.status(500).end();
   if (rows.length === 0) return res.status(401).end();
 
-  const isValid = compare(password, rows[0].kata_sandi);
+  if (username !== rows[0].nama) return res.status(401).end();
+
+  const isValid = await compare(password, rows[0].kata_sandi);
   if (!isValid) return res.status(401).end();
 
   const { nama, role } = rows[0];
