@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 18, 2023 at 01:39 PM
+-- Generation Time: Jan 23, 2023 at 05:20 AM
 -- Server version: 10.4.27-MariaDB
--- PHP Version: 8.1.12
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,25 +28,13 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `data_pengecekan` (
-  `id` varchar(9) NOT NULL,
+  `id` int(9) NOT NULL,
   `id_forklift` varchar(6) NOT NULL,
   `nama_driver` varchar(25) NOT NULL,
   `shift_driver` varchar(5) NOT NULL,
   `status` varchar(20) NOT NULL,
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `data_pengecekan`
---
-
-INSERT INTO `data_pengecekan` (`id`, `id_forklift`, `nama_driver`, `shift_driver`, `status`, `timestamp`) VALUES
-('252242870', 'B29', 'Maulana', 'Siang', 'Kurang Baik', '2023-01-17 12:24:49'),
-('296438928', 'A2', 'asdasd', 'Pagi', 'Kurang Baik', '2023-01-17 12:30:09'),
-('441685160', 'K9', 'HAHahds', 'Pagi', 'Kurang Baik', '2023-01-17 12:31:12'),
-('468451068', 'A23', 'Yusuf', 'Pagi', 'Kurang Baik', '2023-01-17 12:16:16'),
-('516467571', 'A12', 'Hhidayat', 'Pagi', 'Kurang Baik', '2023-01-17 12:27:34'),
-('732042069', 'B21', 'Irfan', 'Pagi', 'Baik', '2023-01-17 12:16:43');
 
 -- --------------------------------------------------------
 
@@ -66,9 +54,9 @@ CREATE TABLE `data_pengguna` (
 --
 
 INSERT INTO `data_pengguna` (`id`, `nama`, `kata_sandi`, `role`) VALUES
-('000000', 'driver', '$2b$10$QFHW0R.n0juNQdtZ9aGg/./nNoOQJRByG0k8ghoTTbsjPYjs2LUDS', 'driver'),
-('111111', 'mechanic', '$2b$10$yymq33snkKGAzJyU85TwIOGax/eaI/aTwC52apzrCBgockRZnyMJa', 'mechanic'),
-('200884', 'irfanhidayat', '$2b$10$gDg3/FOcIX12te7ZevOgW.isrD.l/DiWAxtymJJvQ7K5jgZt6Jviq', 'leader');
+('232187', 'driver', '$2b$10$7bqmtnn5Bc3Soc2a2vVH6O.4x3FbZS8d/I5TtG8b9jjMNsc5ZFsh2', 'driver'),
+('382113', 'mechanic', '$2b$10$cxgFXS6p9Kor5LPhKK85Cu42qfqbRk4uRDELGMj2mU6tujR4LEfvi', 'mechanic'),
+('926469', 'leader', '$2b$10$18NNF1xMIiNbbyf/8LO2DumgysaQ1EQ77oD7L6Q1tneI5TW75BPoC', 'leader');
 
 -- --------------------------------------------------------
 
@@ -77,7 +65,7 @@ INSERT INTO `data_pengguna` (`id`, `nama`, `kata_sandi`, `role`) VALUES
 --
 
 CREATE TABLE `data_perbaikan` (
-  `id` varchar(9) NOT NULL,
+  `id` int(9) NOT NULL,
   `id_forklift` varchar(6) NOT NULL,
   `nama_mechanic` varchar(25) DEFAULT NULL,
   `shift_mechanic` varchar(5) DEFAULT NULL,
@@ -87,17 +75,6 @@ CREATE TABLE `data_perbaikan` (
   `timestamp` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
---
--- Dumping data for table `data_perbaikan`
---
-
-INSERT INTO `data_perbaikan` (`id`, `id_forklift`, `nama_mechanic`, `shift_mechanic`, `nama_leader`, `shift_leader`, `status`, `timestamp`) VALUES
-('252242870', 'B29', NULL, NULL, NULL, NULL, 'Belum Diperbaiki', '2023-01-17 12:24:49'),
-('296438928', 'A2', NULL, NULL, NULL, NULL, 'Belum Diperbaiki', '2023-01-17 12:30:09'),
-('441685160', 'K9', 'Ihsan', 'Pagi', 'Yusuf', 'Siang', 'Sudah Diperbaiki', '2023-01-17 12:31:12'),
-('468451068', 'A23', NULL, NULL, NULL, NULL, 'Belum Diperbaiki', '2023-01-17 12:16:16'),
-('516467571', 'A12', NULL, NULL, NULL, NULL, 'Belum Diperbaiki', '2023-01-17 12:27:34');
-
 -- --------------------------------------------------------
 
 --
@@ -105,34 +82,22 @@ INSERT INTO `data_perbaikan` (`id`, `id_forklift`, `nama_mechanic`, `shift_mecha
 --
 
 CREATE TABLE `detail_pengecekan` (
-  `id` varchar(9) NOT NULL,
-  `ban` varchar(50) DEFAULT NULL,
-  `fork` varchar(50) DEFAULT NULL,
-  `seat_belt` varchar(50) DEFAULT NULL,
-  `lampu_depan_belakang` varchar(50) DEFAULT NULL,
-  `rem_tangan_kaki` varchar(50) DEFAULT NULL,
-  `lampu_sein` varchar(50) DEFAULT NULL,
-  `klakson` varchar(50) DEFAULT NULL,
-  `alarm_mundur` varchar(50) DEFAULT NULL,
-  `lampu_sirine` varchar(50) DEFAULT NULL,
-  `tempat_duduk` varchar(50) DEFAULT NULL,
-  `kaca_spion` varchar(50) DEFAULT NULL,
-  `apar` varchar(50) DEFAULT NULL,
-  `oli` varchar(50) DEFAULT NULL,
-  `kebersihan` varchar(50) DEFAULT NULL
+  `id` int(9) NOT NULL,
+  `ban` varchar(25) DEFAULT NULL,
+  `fork` varchar(25) DEFAULT NULL,
+  `seat_belt` varchar(25) DEFAULT NULL,
+  `lampu_depan_belakang` varchar(25) DEFAULT NULL,
+  `rem_tangan_kaki` varchar(25) DEFAULT NULL,
+  `lampu_sein` varchar(25) DEFAULT NULL,
+  `klakson` varchar(25) DEFAULT NULL,
+  `alarm_mundur` varchar(25) DEFAULT NULL,
+  `lampu_sirine` varchar(25) DEFAULT NULL,
+  `tempat_duduk` varchar(25) DEFAULT NULL,
+  `kaca_spion` varchar(25) DEFAULT NULL,
+  `apar` varchar(25) DEFAULT NULL,
+  `oli` varchar(25) DEFAULT NULL,
+  `kebersihan` varchar(25) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `detail_pengecekan`
---
-
-INSERT INTO `detail_pengecekan` (`id`, `ban`, `fork`, `seat_belt`, `lampu_depan_belakang`, `rem_tangan_kaki`, `lampu_sein`, `klakson`, `alarm_mundur`, `lampu_sirine`, `tempat_duduk`, `kaca_spion`, `apar`, `oli`, `kebersihan`) VALUES
-('252242870', 'Kempes', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('296438928', NULL, NULL, NULL, NULL, NULL, 'Ada kerusakan', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('441685160', NULL, NULL, NULL, 'Ada kerusakan', NULL, NULL, NULL, NULL, NULL, 'Ada kerusakan', NULL, NULL, 'Ada kerusakan', 'Kendaraan kotor'),
-('468451068', NULL, NULL, NULL, NULL, 'Rem macet', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Bocor', NULL),
-('516467571', NULL, NULL, 'Putus', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('732042069', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
