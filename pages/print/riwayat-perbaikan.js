@@ -60,6 +60,12 @@ const RiwayatPerbaikan = () => {
           status: 'Kurang Baik',
           keterangan: riwayat[0][row.long_name],
         });
+      } else {
+        data.push({
+          nama: row.name,
+          status: 'Baik',
+          keterangan: '-',
+        });
       }
     });
 
