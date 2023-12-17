@@ -16,3 +16,4 @@ Driver
 
 # Backdoor API
 * Reset data: https://forklift-web.vercel.app/api/backdoor/reset
+* Register user: https://forklift-web.vercel.app/api/backdoor/register?username=leader&role=leader&password=24agustus
