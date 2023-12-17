@@ -15,5 +15,4 @@ Driver
 * Password: 24agustus
 
 # Backdoor API
-* Register user:
-https://forklift-web.vercel.app/api/backdoor/register?username=leader&role=leader&password=24agustus
+* Register User: https://forklift-web.vercel.app/api/backdoor/register?username=leader&role=leader&password=24agustus
