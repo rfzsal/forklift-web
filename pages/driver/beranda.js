@@ -11,8 +11,7 @@ const Beranda = () => {
       <div className="flex flex-wrap">
         <div className="w-full">
           <CardRiwayat
-            hideActionButton
-            data={pengecekan.riwayat?.slice(0, 5)}
+            data={pengecekan.riwayat}
           />
         </div>
       </div>

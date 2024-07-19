@@ -1,18 +1,17 @@
 import { withSessionSsr } from 'lib/session';
-import CardRiwayat from 'views/shared/CardRiwayatPengecekan';
+import CardRiwayat from 'views/shared/CardRiwayatPerbaikan';
 import Mechanic from 'layouts/Mechanic';
-import { usePengecekan } from 'hooks/usePengecekan';
+import { usePerbaikan } from 'hooks/usePerbaikan';
 
 const Beranda = () => {
-  const pengecekan = usePengecekan();
+  const perbaikan = usePerbaikan();
 
   return (
     <>
       <div className="flex flex-wrap">
         <div className="w-full">
           <CardRiwayat
-            hideActionButton
-            data={pengecekan.riwayat?.slice(0, 5)}
+            data={perbaikan.riwayat}
           />
         </div>
       </div>
